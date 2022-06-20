@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/earlyaccess/notokufiarabic.css");
+@font-face {
+    font-family: 'JF-Flat';
+    font-style: normal;
+    font-weight: 400;
+    src: url("../fonts/JF Flat Regular.otf");
+}
+:root{
+    --primary-color:#21FFD6;
+}
+.bg-primary-color{
+    background-color: var(--primary-color);
+}
+body{
+    background-color: #F2F2F2!important;
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-family: 'JF-Flat';
+}
+#app{
+    min-height: calc(100vh - 88px);
+}
+.lh-2{
+    line-height: 2;
+}
+.navbar{
+    background-color:var(--primary-color) !important;
+    font-family: 'Noto Kufi Arabic', sans-serif;
+}

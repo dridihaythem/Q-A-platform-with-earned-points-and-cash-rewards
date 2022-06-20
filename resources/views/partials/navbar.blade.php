@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-lg bg-light py-4">
+    <div class="container">
+        <a class="navbar-brand" href="{{ route('questions.index') }}">
+            إجابات
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ route('questions.index') }}">
+                        <i class="fa-solid fa-house"></i>
+                        الصفحة الرئيسية
+                    </a>
+                </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <input class="form-control" type="search" placeholder="أكتب ما تبحث عنه ..." aria-label="Search">
+                {{-- <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i>
+                    البحث</button> --}}
+            </form>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                @guest
+                <li class="nav-item me-1">
+                    <a class="nav-link btn btn-primary text-white rounded-4 px-3" href="{{ route('login') }}">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        الدخول إلى حسابك
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-success text-white rounded-4 px-3" href="{{ route('register') }}">
+                        <i class="fa-solid fa-user-plus"></i>
+                        تسجيل حساب جديد
+                    </a>
+                </li>
+                @else
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <img class="rounded-circle" style="height:37px" src="{{ asset(Auth::user()->avatar) }}" alt="">
+                        {{ Auth::user()->name }}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{{ route('logout')}}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="nav-icon fa-solid fa-arrow-right-from-bracket"></i>
+                                تسجيل الخروج</a></li>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </ul>
+                </li>
+                @endguest
+            </ul>
+        </div>
+    </div>
+</nav>
