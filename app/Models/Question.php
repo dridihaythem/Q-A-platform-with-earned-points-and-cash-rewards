@@ -10,4 +10,14 @@ class Question extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function scopePublished($query)
+    {
+        return $query->where('status', 'published');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
