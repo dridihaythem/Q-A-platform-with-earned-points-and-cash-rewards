@@ -15,6 +15,14 @@
                         الصفحة الرئيسية
                     </a>
                 </li>
+                @auth
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ route('questions.create') }}">
+                        <i class="fa-solid fa-circle-plus"></i>
+                        إضافة سؤال
+                    </a>
+                </li>
+                @endauth
             </ul>
             <form class="d-flex" role="search">
                 <input class="form-control" type="search" placeholder="أكتب ما تبحث عنه ..." aria-label="Search">
