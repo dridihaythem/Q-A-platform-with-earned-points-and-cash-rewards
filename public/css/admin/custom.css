@@ -1,0 +1,10 @@
+@import url("https://fonts.googleapis.com/earlyaccess/notokufiarabic.css");
+@font-face {
+    font-family: 'JF-Flat';
+    font-style: normal;
+    font-weight: 400;
+    src: url("../fonts/JF Flat Regular.otf");
+}
+body{
+    font-family: 'Noto Kufi Arabic', sans-serif;
+}
