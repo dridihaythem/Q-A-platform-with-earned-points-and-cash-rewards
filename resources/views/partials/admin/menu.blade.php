@@ -14,6 +14,14 @@
                 </div>
             </li>
             <li>
+                <a href="{{ route('questions.index') }}">
+                    <i class="fa-solid fa-house-user"></i>
+                    <span class="nav-label">
+                        الصفحة الرئيسية
+                    </span>
+                </a>
+            </li>
+            <li>
                 <a href="#">
                     <i class="fa fa-th-large"></i>
                     <span class="fa arrow"></span>
@@ -34,14 +42,28 @@
                     </li>
                 </ul>
             </li>
-            {{-- <li>
-                <a href="{{ route('admin.categories.index') }}">
-                    <i class="fa fa-diamond"></i>
-                    <span class="nav-label">
-                        التحكم في التصنيفات
-                    </span>
+
+            <li>
+                <a href="#">
+                    <i class="fa fa-th-large"></i>
+                    <span class="fa arrow"></span>
+                    <span class="nav-label">التحكم في الأسئلة</span>
                 </a>
-            </li> --}}
+                <ul class="nav nav-second-level collapse">
+                    <li>
+                        <a href="{{ route('admin.questions.index') }}?status=published">
+                            <i class="fa-solid fa-list"></i>
+                            قائمة الأسئلة المشورة
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.questions.index') }}?status=pending">
+                            <i class="fa-solid fa-list"></i>
+                            قائمة الأسئلة في إنتظار النشر
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
 
     </div>

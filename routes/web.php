@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\QuestionController as AdminQuestionController;
 use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,4 +22,6 @@ Route::resource('questions', QuestionController::class)->only(['create', 'store'
 
 Route::prefix('admin')->as('admin.')->group(function () {
     Route::resource('categories', CategoryController::class)->except('show');
+    Route::put('/questions/{question}/publish', [AdminQuestionController::class, 'publish'])->name('questions.publish');
+    Route::resource('questions', AdminQuestionController::class)->except(['show', 'create', 'store']);
 });
