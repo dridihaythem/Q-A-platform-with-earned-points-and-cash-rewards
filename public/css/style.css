@@ -26,3 +26,8 @@ body{
     background-color:var(--primary-color) !important;
     font-family: 'Noto Kufi Arabic', sans-serif;
 }
+.navbar-toggler , .navbar-toggler:focus{
+    border: none;
+    outline: none;
+    box-shadow: none;
+}

@@ -1,11 +1,11 @@
-<nav class="navbar navbar-expand-lg bg-light py-4">
+<nav class="navbar navbar-expand-md bg-light py-4">
     <div class="container">
         <a class="navbar-brand" href="{{ route('questions.index') }}">
             إجابات
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <i class="fa-solid fa-bars text-white"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -31,7 +31,7 @@
             </form>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 @guest
-                <li class="nav-item me-1">
+                <li class="nav-item me-1 my-2 my-md-0">
                     <a class="nav-link btn btn-primary text-white rounded-4 px-3" href="{{ route('login') }}">
                         <i class="fa-solid fa-right-to-bracket"></i>
                         الدخول إلى حسابك
