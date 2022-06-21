@@ -57,9 +57,10 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function show(Question $question)
+    public function show($id)
     {
-        $question =  $question->published()
+        $question = Question::where('id', $id)
+            ->published()
             ->with('publishedAnswers.user')
             ->firstOrFail();
         return view('questions.show', ['question' => $question]);

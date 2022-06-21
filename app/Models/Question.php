@@ -33,6 +33,6 @@ class Question extends Model
 
     public function publishedAnswers()
     {
-        return $this->hasMany(Answer::class);
+        return $this->hasMany(Answer::class)->where('status', 'published');
     }
 }
