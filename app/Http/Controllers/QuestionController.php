@@ -58,7 +58,9 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
-        abort_if($question->status !== "published", 404);
+        $question =  $question->published()
+            ->with('publishedAnswers.user')
+            ->firstOrFail();
         return view('questions.show', ['question' => $question]);
     }
 }
