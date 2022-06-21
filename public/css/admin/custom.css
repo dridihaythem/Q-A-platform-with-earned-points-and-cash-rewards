@@ -8,3 +8,6 @@
 body{
     font-family: 'Noto Kufi Arabic', sans-serif;
 }
+.metismenu .arrow {
+    float: left;
+}

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [QuestionController::class, 'index'])->name('questions.index');
 
 Route::resource('questions', QuestionController::class)->only(['create', 'store', 'show']);
+
+Route::prefix('admin')->as('admin.')->group(function () {
+    Route::resource('categories', CategoryController::class)->except('show');
+});

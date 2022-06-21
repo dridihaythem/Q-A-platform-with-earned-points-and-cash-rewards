@@ -14,19 +14,34 @@
                 </div>
             </li>
             <li>
-                <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span> <span
-                        class="fa arrow"></span></a>
+                <a href="#">
+                    <i class="fa fa-th-large"></i>
+                    <span class="fa arrow"></span>
+                    <span class="nav-label">التحكم في التصنيفات</span>
+                </a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="index.html">Dashboard v.1</a></li>
-                    <li><a href="dashboard_2.html">Dashboard v.2</a></li>
-                    <li><a href="dashboard_3.html">Dashboard v.3</a></li>
-                    <li><a href="dashboard_4_1.html">Dashboard v.4</a></li>
-                    <li><a href="dashboard_5.html">Dashboard v.5 </a></li>
+                    <li>
+                        <a href="{{ route('admin.categories.create') }}">
+                            <i class="fa-solid fa-circle-plus"></i>
+                            إضافة تصنيف جديد
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.categories.index') }}">
+                            <i class="fa-solid fa-list"></i>
+                            قائمة التنصيفات
+                        </a>
+                    </li>
                 </ul>
             </li>
-            <li>
-                <a href="layouts.html"><i class="fa fa-diamond"></i> <span class="nav-label">Layouts</span></a>
-            </li>
+            {{-- <li>
+                <a href="{{ route('admin.categories.index') }}">
+                    <i class="fa fa-diamond"></i>
+                    <span class="nav-label">
+                        التحكم في التصنيفات
+                    </span>
+                </a>
+            </li> --}}
         </ul>
 
     </div>
