@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Question\CreateAnswerRequest;
 use App\Http\Requests\Question\CreateQuestionRequest;
 use App\Models\Category;
 use App\Models\Question;
@@ -12,7 +13,7 @@ class QuestionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only(['create', 'store']);
+        $this->middleware('auth')->only(['create', 'store', 'answer']);
     }
     /**
      * Display a listing of the resource.
@@ -62,5 +63,15 @@ class QuestionController extends Controller
             ->with('publishedAnswers.user')
             ->firstOrFail();
         return view('questions.show', ['question' => $question]);
+    }
+
+    public function answer(Question $question, CreateAnswerRequest $request)
+    {
+        Auth::user()->answers()->create([
+            'question_id' => $question->id,
+            'content' => $request->content
+        ]);
+
+        return redirect()->back()->with('success', 'تم إضافة إجابتك ، سيتم نشرها بعد مراجعتها من قبل فريقنا');
     }
 }

@@ -18,6 +18,43 @@
         </div>
     </div>
 
+    {{-- إضافة إجابة --}}
+
+    @auth
+    <div class="col-md-10 bg-white shadow rounded-3 my-3">
+        <div class="p-5">
+            <div class="d-flex align-items-center gap-2">
+                <img width="60px" src="https://www.ejaabat.com/avatars/0.svg" alt="">
+                <div>
+                    {{ Auth::user()->name }}
+                </div>
+            </div>
+            <div class="mt-3 lh-2">
+                @include('partials.alert')
+                <form method="post" action="{{ route('questions.answer',$question) }}">
+                    @csrf
+                    <div class="mb-3">
+                        <label>الإجابة :</label>
+                        <textarea name="content" class="form-control">{{ old('content') }}</textarea>
+                    </div>
+                    <button class="btn btn-sm btn-primary"><i class="fa-solid fa-paper-plane"></i> إضافة
+                        الإجابة</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    @else
+    <div class="col-md-10 bg-white shadow rounded-3 my-3">
+        <div class="p-5">
+            <div class="mt-3 lh-2">
+                <div class="alert alert-info">
+                    <i class="fa-solid fa-circle-info"></i> قم بتسجيل الدخول لإضافة إجابة
+                </div>
+            </div>
+        </div>
+    </div>
+    @endauth
+
     {{-- الإجابات --}}
 
     @foreach($question->publishedAnswers as $answer)
