@@ -20,7 +20,11 @@
                     </div>
                     <div class="form-group mb-3">
                         <label class="mb-1">السؤال :</label>
-                        <input name="title" type="title" class="form-control" placeholder="ما هو سعر صرف الدولار اليوم">
+                        <input name="title" type="text" class="form-control" placeholder="ما هو سعر صرف الدولار اليوم">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="mb-1">وصف السؤال :</label>
+                        <textarea name="content" class="form-control">{{ old('content') }}</textarea>
                     </div>
                     <button class="btn btn-primary">
                         الإضافة

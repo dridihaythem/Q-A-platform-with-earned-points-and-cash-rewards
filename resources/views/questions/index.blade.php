@@ -17,7 +17,7 @@
     <div class="card my-2">
         <a href="{{ route('questions.show',$question) }}" class="text-decoration-none text-dark">
             <div class="card-body">
-                {{ $question->title }} ?
+                {{ $question->title }} ؟
             </div>
         </a>
     </div>

@@ -25,7 +25,8 @@ class CreateQuestionRequest extends FormRequest
     {
         return [
             'category_id' => 'required|numeric|exists:categories,id',
-            'title' => 'required'
+            'title' => 'required',
+            'content' => 'required'
         ];
     }
 }

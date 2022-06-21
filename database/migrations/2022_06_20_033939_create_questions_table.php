@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignIdFor(Category::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->string('title');
+            $table->longText('content');
             $table->integer('views')->default(0);
             $table->enum('status', ['published', 'pending', 'deleted'])->default('pending');
             $table->timestamps();
