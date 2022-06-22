@@ -64,9 +64,14 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Question $question)
+    public function destroy(Request $request, Question $question)
     {
+        if ($request->has('ban_user')) {
+            $question->user()->update(['is_active' => false]);
+        }
+
         $question->delete();
+
         return redirect()->back()
             ->with('success', 'تم الحذف بنجاح');
     }

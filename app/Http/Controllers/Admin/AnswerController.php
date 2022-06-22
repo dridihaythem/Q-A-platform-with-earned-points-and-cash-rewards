@@ -63,8 +63,12 @@ class AnswerController extends Controller
      * @param  \App\Models\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Answer $answer)
+    public function destroy(Request $request, Answer $answer)
     {
+        if ($request->has('ban_user')) {
+            $answer->user()->update(['is_active' => false]);
+        }
+
         $answer->delete();
 
         return redirect()->back()

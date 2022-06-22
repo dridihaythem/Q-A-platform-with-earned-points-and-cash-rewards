@@ -65,6 +65,16 @@
                                     الحذف
                                 </button>
                             </form>
+                            <form class="d-inline" method="post"
+                                action="{{ route('admin.questions.destroy',$question) }}">
+                                @csrf
+                                @method('delete')
+                                <input type="hidden" name="ban_user" value="1">
+                                <button class="btn btn-xs btn-danger btn-delete">
+                                    <i class="fa fa-trash"></i>
+                                    الحذف و الحظر
+                                </button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach
