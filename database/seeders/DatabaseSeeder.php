@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Answer;
 use App\Models\Category;
+use App\Models\PaymentMethod;
 use App\Models\Question;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -23,5 +24,13 @@ class DatabaseSeeder extends Seeder
         Question::factory(30)->published()->create();
         Answer::factory(10)->create();
         Answer::factory(80)->published()->create();
+        PaymentMethod::create([
+            'name' => 'paypal',
+            'instruction' => 'قم بإدخال إيميل البيابل الخاص بك'
+        ]);
+        PaymentMethod::create([
+            'name' => 'bitcoin',
+            'instruction' => 'قم بأدخل رابط محفظة البيتكون الخاصة بك'
+        ]);
     }
 }
