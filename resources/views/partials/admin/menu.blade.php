@@ -114,6 +114,28 @@
                     </li>
                 </ul>
             </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa-brands fa-paypal"></i>
+                    <span class="fa arrow"></span>
+                    <span class="nav-label">التحكم في وسائل السحب</span>
+                </a>
+                <ul class="nav nav-second-level collapse">
+                    <li>
+                        <a href="{{ route('admin.payment_methods.create') }}">
+                            <i class="fa-solid fa-circle-plus"></i>
+                            إضافة وسيلة سحب
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.payment_methods.index') }}">
+                            <i class="fa-solid fa-list"></i>
+                            قائمة وسائل السحب
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
 
     </div>

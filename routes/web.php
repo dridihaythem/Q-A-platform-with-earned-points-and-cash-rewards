@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AnswerController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\MainController as AdminMainController;
+use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\QuestionController as AdminQuestionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\MainController;
@@ -39,4 +40,5 @@ Route::prefix('admin')->as('admin.')->middleware('admin')->group(function () {
     Route::put('/answers/{answer}/publish', [AnswerController::class, 'publish'])->name('answers.publish');
 
     Route::resource('users', UserController::class)->except(['show', 'create', 'store']);
+    Route::resource('payment_methods', PaymentMethodController::class)->except('show');
 });
