@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\QuestionController as AdminQuestionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\WithdrawRequestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,8 @@ Route::post('questions/{question}/answer', [QuestionController::class, 'answer']
 Route::post('/questions/{question}/{answer}/choose_best_answer', [QuestionController::class, 'chooseBestAnswer'])->name('questions.choose_best_answer');
 
 Route::get('/banned', [MainController::class, 'banned'])->name('banned');
+
+Route::resource('/request/withdraw', WithdrawRequestController::class)->only(['index', 'create', 'store']);
 
 Route::prefix('admin')->as('admin.')->middleware('admin')->group(function () {
     Route::get('/', [AdminMainController::class, 'index'])->name('index');

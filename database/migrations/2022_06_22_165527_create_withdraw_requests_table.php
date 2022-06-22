@@ -19,10 +19,10 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(PaymentMethod::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-            $table->float('amount', 8, 2)->default(0);
-            $table->enum('status', ['pending', 'approved', 'rejected']);
+            $table->float('amount', 8, 2);
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->longText('payment_details')->nullable();
-            $table->longText('status_details')->nullable();
+            $table->longText('note')->nullable();
             $table->timestamps();
         });
     }

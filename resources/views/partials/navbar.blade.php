@@ -22,6 +22,12 @@
                         إضافة سؤال
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ route('withdraw.index') }}">
+                        <i class="fa-brands fa-paypal"></i>
+                        طلبات سحب الرصيد
+                    </a>
+                </li>
                 @endauth
             </ul>
             <form class="d-flex" role="search">
@@ -48,6 +54,7 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         <img class="rounded-circle" style="height:37px" src="{{ asset(Auth::user()->avatar) }}" alt="">
+                        <span class="badge text-bg-secondary">{{ Auth::user()->balance }}</span>
                         {{ Auth::user()->name }}
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">

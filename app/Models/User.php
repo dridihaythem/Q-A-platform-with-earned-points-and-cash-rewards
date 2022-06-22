@@ -37,4 +37,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Answer::class)->where('status', 'published');
     }
+
+    public function withdrawRequests()
+    {
+        return $this->hasMany(WithdrawRequest::class);
+    }
 }
