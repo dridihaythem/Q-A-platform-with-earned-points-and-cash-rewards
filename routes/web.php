@@ -28,7 +28,7 @@ Route::post('/questions/{question}/{answer}/choose_best_answer', [QuestionContro
 
 Route::get('/banned', [MainController::class, 'banned'])->name('banned');
 
-Route::prefix('admin')->as('admin.')->group(function () {
+Route::prefix('admin')->as('admin.')->middleware('admin')->group(function () {
     Route::get('/', [AdminMainController::class, 'index'])->name('index');
     Route::resource('categories', CategoryController::class)->except('show');
 
