@@ -9,6 +9,7 @@ use App\Models\Question;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -31,6 +32,10 @@ class DatabaseSeeder extends Seeder
         PaymentMethod::create([
             'name' => 'bitcoin',
             'instruction' => 'قم بأدخل رابط محفظة البيتكون الخاصة بك'
+        ]);
+        User::factory(1)->create([
+            'email' => 'demo@admin.com',
+            'password' => Hash::make('demo@admin.com')
         ]);
     }
 }
