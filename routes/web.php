@@ -2,9 +2,10 @@
 
 use App\Http\Controllers\Admin\AnswerController;
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\MainController;
+use App\Http\Controllers\Admin\MainController as AdminMainController;
 use App\Http\Controllers\Admin\QuestionController as AdminQuestionController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,8 +26,10 @@ Route::resource('questions', QuestionController::class)->only(['create', 'store'
 Route::post('questions/{question}/answer', [QuestionController::class, 'answer'])->name('questions.answer');
 Route::post('/questions/{question}/{answer}/choose_best_answer', [QuestionController::class, 'chooseBestAnswer'])->name('questions.choose_best_answer');
 
+Route::get('/banned', [MainController::class, 'banned'])->name('banned');
+
 Route::prefix('admin')->as('admin.')->group(function () {
-    Route::get('/', [MainController::class, 'index'])->name('index');
+    Route::get('/', [AdminMainController::class, 'index'])->name('index');
     Route::resource('categories', CategoryController::class)->except('show');
 
     Route::put('/questions/{question}/publish', [AdminQuestionController::class, 'publish'])->name('questions.publish');
