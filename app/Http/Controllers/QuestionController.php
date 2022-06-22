@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Question\CreateAnswerRequest;
 use App\Http\Requests\Question\CreateQuestionRequest;
+use App\Models\Answer;
 use App\Models\Category;
 use App\Models\Question;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class QuestionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only(['create', 'store', 'answer']);
+        $this->middleware('auth')->only(['create', 'store', 'answer', 'chooseBestAnswer']);
     }
     /**
      * Display a listing of the resource.
@@ -74,5 +75,14 @@ class QuestionController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'تم إضافة إجابتك ، سيتم نشرها بعد مراجعتها من قبل فريقنا');
+    }
+
+    public function chooseBestAnswer(Question $question, Answer $answer)
+    {
+        abort_unless(Auth::user()->id == $question->user_id || Auth::user()->is_admin, 401);
+        $question->answers()->where('best_answer', true)->update(['best_answer' => false]);
+        $answer->update(['best_answer' => true]);
+
+        return redirect()->back();
     }
 }

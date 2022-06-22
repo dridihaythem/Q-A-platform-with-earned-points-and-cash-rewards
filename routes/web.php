@@ -22,6 +22,7 @@ Route::get('/', [QuestionController::class, 'index'])->name('questions.index');
 
 Route::resource('questions', QuestionController::class)->only(['create', 'store', 'show']);
 Route::post('questions/{question}/answer', [QuestionController::class, 'answer'])->name('questions.answer');
+Route::post('/questions/{question}/{answer}/choose_best_answer', [QuestionController::class, 'chooseBestAnswer'])->name('questions.choose_best_answer');
 
 Route::prefix('admin')->as('admin.')->group(function () {
     Route::get('/', [MainController::class, 'index'])->name('index');

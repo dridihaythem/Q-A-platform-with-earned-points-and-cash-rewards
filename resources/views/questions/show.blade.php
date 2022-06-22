@@ -63,7 +63,7 @@
     {{-- الإجابات --}}
 
     @foreach($question->publishedAnswers as $answer)
-    <div class="col-md-10 bg-white shadow rounded-3 my-3">
+    <div class="col-md-10 shadow rounded-3 my-3 @if($answer->best_answer) bg-primary-color @else bg-white @endif">
         <div class="p-5">
             <div class="d-flex align-items-center gap-2">
                 <img width="60px" src="https://www.ejaabat.com/avatars/0.svg" alt="">
@@ -74,6 +74,16 @@
             </div>
             <div class="mt-3 lh-2">
                 {{ $answer->content }}
+                @if(!$answer->best_answer && (Auth::check() && (Auth::user()->id == $question->user_id ||
+                Auth::user()->is_admin)))
+                <form class="my-1" method="post"
+                    action="{{ route('questions.choose_best_answer',['question'=>$question,'answer'=>$answer]) }}">
+                    @csrf
+                    <button class="btn btn-success btn-sm float-end"><i class="fa-solid fa-check"></i> الإختيار كأفضل
+                        إجابة</button>
+                    <div class="clearfix"></div>
+                </form>
+                @endif
             </div>
         </div>
     </div>
