@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AnswerController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\QuestionController as AdminQuestionController;
@@ -25,6 +26,10 @@ Route::post('questions/{question}/answer', [QuestionController::class, 'answer']
 Route::prefix('admin')->as('admin.')->group(function () {
     Route::get('/', [MainController::class, 'index'])->name('index');
     Route::resource('categories', CategoryController::class)->except('show');
+
     Route::put('/questions/{question}/publish', [AdminQuestionController::class, 'publish'])->name('questions.publish');
     Route::resource('questions', AdminQuestionController::class)->except(['show', 'create', 'store']);
+
+    Route::resource('answers', AnswerController::class)->except(['show', 'create', 'store']);
+    Route::put('/answers/{answer}/publish', [AnswerController::class, 'publish'])->name('answers.publish');
 });

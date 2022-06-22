@@ -64,6 +64,28 @@
                     </li>
                 </ul>
             </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa fa-th-large"></i>
+                    <span class="fa arrow"></span>
+                    <span class="nav-label">التحكم في الإجابات</span>
+                </a>
+                <ul class="nav nav-second-level collapse">
+                    <li>
+                        <a href="{{ route('admin.answers.index') }}?status=published">
+                            <i class="fa-solid fa-list"></i>
+                            قائمة الإجابات المشورة
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.answers.index') }}?status=pending">
+                            <i class="fa-solid fa-list"></i>
+                            قائمة الإجابات في إنتظار النشر
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
 
     </div>
