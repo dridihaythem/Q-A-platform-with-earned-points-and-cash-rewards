@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AnswerController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\QuestionController as AdminQuestionController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,4 +34,6 @@ Route::prefix('admin')->as('admin.')->group(function () {
 
     Route::resource('answers', AnswerController::class)->except(['show', 'create', 'store']);
     Route::put('/answers/{answer}/publish', [AnswerController::class, 'publish'])->name('answers.publish');
+
+    Route::resource('users', UserController::class)->except(['show', 'create', 'store']);
 });

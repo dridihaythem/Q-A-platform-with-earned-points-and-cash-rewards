@@ -86,6 +86,34 @@
                     </li>
                 </ul>
             </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-users"></i>
+                    <span class="fa arrow"></span>
+                    <span class="nav-label">التحكم في الأعضاء</span>
+                </a>
+                <ul class="nav nav-second-level collapse">
+                    <li>
+                        <a href="{{ route('admin.users.index') }}">
+                            <i class="fa-solid fa-list"></i>
+                            قائمة الأعضاء
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.users.index') }}?filter=banned">
+                            <i class="fa-solid fa-list"></i>
+                            قائمة الأعضاء المحظورين
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.users.index') }}?filter=admins">
+                            <i class="fa-solid fa-list"></i>
+                            قائمة المديرين
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
 
     </div>

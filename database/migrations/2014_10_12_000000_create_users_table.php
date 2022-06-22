@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->nullable();
             $table->string('password')->nullable();
+            $table->float('balance', 8, 2)->default(0);
+            $table->boolean('is_active')->default(true);
             $table->boolean('is_admin')->default(false);
             $table->rememberToken();
             $table->timestamps();
