@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignIdFor(Question::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->longText('content');
+            $table->boolean('best_answer')->default(false);
             $table->enum('status', ['published', 'pending', 'deleted'])->default('pending');
             $table->timestamps();
         });
