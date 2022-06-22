@@ -7,11 +7,16 @@
             <h1 class="fs-4">{{ $question->title}} ?</h1>
             <p>{{ $question->content }}</p>
             <div class="mt-3">
-                <span class="px-4 py-2 d-inline-block rounded-4 bg-primary-color">
+                <span
+                    class="px-4 py-2 d-inline-block rounded-4 @if(count($question->publishedAnswers) == 0) bg-danger text-white @else bg-primary-color @endif">
+                    @if(count($question->publishedAnswers) == 0)
+                    <i class="fa-solid fa-circle-xmark"></i> لم تتم الإجابة بعد
+                    @else
                     <i class="fa-solid fa-check"></i> تمت الإجابة
+                    @endif
                 </span>
                 <span class="px-4 py-2 d-inline-block rounded-4" style="background-color: #F9F9F9">
-                    عدد الإجابات :3
+                    عدد الإجابات : {{count($question->publishedAnswers)}}
                 </span>
             </div>
 
