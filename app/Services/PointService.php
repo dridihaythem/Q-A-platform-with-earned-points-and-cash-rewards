@@ -35,4 +35,9 @@ class PointService
     {
         return $points * $this->rate;
     }
+
+    public function convertToPoint($amount)
+    {
+        return $amount / $this->rate;
+    }
 }

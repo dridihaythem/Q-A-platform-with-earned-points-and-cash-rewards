@@ -28,6 +28,9 @@
                         <label class="mb-1">المبلغ :</label>
                         <input type="number" step="0.01" name="amount" value="{{ old('amount') }}" class="form-control"
                             placeholder="0.00">
+                        <p class="text-secondary">
+                            رصيدك الحالي : {{$balance}}$
+                        </p>
                     </div>
                     <div class="form-group mb-3">
                         <label class="mb-1">معلومات الدفع :</label>

@@ -2,6 +2,7 @@
 
 namespace App\Rules;
 
+use App\Services\PointService;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,9 +13,10 @@ class haveBalance implements Rule
      *
      * @return void
      */
+    private $pointService;
     public function __construct()
     {
-        //
+        $this->pointService = new PointService();
     }
 
     /**
@@ -26,7 +28,7 @@ class haveBalance implements Rule
      */
     public function passes($attribute, $value)
     {
-        return Auth::user()->balance >= $value;
+        return $this->pointService->convert(Auth::user()->points) >= $value;
     }
 
     /**

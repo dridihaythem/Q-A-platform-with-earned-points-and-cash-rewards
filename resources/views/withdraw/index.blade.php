@@ -26,7 +26,7 @@
                         @foreach ($requests as $request)
                         <tr>
                             <th scope="row">{{ $request->id }}</th>
-                            <td>{{ $request->amount }}</td>
+                            <td>${{ $request->amount }}</td>
                             <td>{{ $request->paymentMethod->name }}</td>
                             <td>{{ $request->payment_details }}</td>
                             <td>

@@ -26,7 +26,7 @@ class CreateWithdrawRequest extends FormRequest
     {
         return [
             'payment_method_id' => 'required|numeric|exists:payment_methods,id',
-            'amount' => ['required', 'numeric', 'min:0', new haveBalance()],
+            'amount' => ['required', 'numeric', 'min:1', new haveBalance()],
             'payment_details' => 'required'
         ];
     }

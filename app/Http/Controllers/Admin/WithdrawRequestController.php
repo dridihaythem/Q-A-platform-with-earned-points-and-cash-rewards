@@ -5,10 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Withdraw\UpdateWithdrawRequest;
 use App\Models\WithdrawRequest;
+use App\Services\PointService;
 use Illuminate\Http\Request;
 
 class WithdrawRequestController extends Controller
 {
+    public function __construct(private PointService $pointService)
+    {
+    }
     /**
      * Display a listing of the resource.
      *
@@ -56,7 +60,7 @@ class WithdrawRequestController extends Controller
     {
         $withdraw->update(['status' => 'rejected']);
 
-        $withdraw->user()->increment('balance', $withdraw->amount);
+        $withdraw->user()->increment('points', $this->pointService->convertToPoint($withdraw->amount));
 
         return redirect()->back()->with('success', 'تم رفض عملية السحب');
     }
