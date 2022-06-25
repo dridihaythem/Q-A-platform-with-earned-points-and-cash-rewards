@@ -116,6 +116,15 @@
             </li>
 
             <li>
+                <a href="{{ route('admin.withdraw.index') }}">
+                    <i class="fa-brands fa-paypal"></i>
+                    <span class="nav-label">
+                        طلبات السحب
+                    </span>
+                </a>
+            </li>
+
+            <li>
                 <a href="#">
                     <i class="fa-brands fa-paypal"></i>
                     <span class="fa arrow"></span>

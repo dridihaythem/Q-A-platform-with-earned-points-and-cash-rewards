@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\MainController as AdminMainController;
 use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\QuestionController as AdminQuestionController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\WithdrawRequestController as AdminWithdrawRequestController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\WithdrawRequestController;
@@ -44,4 +45,6 @@ Route::prefix('admin')->as('admin.')->middleware('admin')->group(function () {
 
     Route::resource('users', UserController::class)->except(['show', 'create', 'store']);
     Route::resource('payment_methods', PaymentMethodController::class)->except('show');
+
+    Route::resource('/withdraw', AdminWithdrawRequestController::class)->except(['show', 'create', 'store']);
 });
