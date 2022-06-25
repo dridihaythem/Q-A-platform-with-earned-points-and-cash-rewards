@@ -54,7 +54,8 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         <img class="rounded-circle" style="height:37px" src="{{ asset(Auth::user()->avatar) }}" alt="">
-                        <span class="badge text-bg-secondary">{{ Auth::user()->balance }}</span>
+                        <span class="badge text-bg-secondary">
+                            {{ Auth::user()->points }} نقطة</span>
                         {{ Auth::user()->name }}
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">

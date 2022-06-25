@@ -7,12 +7,13 @@ use App\Http\Requests\Question\CreateQuestionRequest;
 use App\Models\Answer;
 use App\Models\Category;
 use App\Models\Question;
+use App\Services\PointService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
 {
-    public function __construct()
+    public function __construct(private PointService $pointService)
     {
         $this->middleware('auth')->only(['create', 'store', 'answer', 'chooseBestAnswer']);
     }
@@ -80,8 +81,11 @@ class QuestionController extends Controller
     public function chooseBestAnswer(Question $question, Answer $answer)
     {
         abort_unless(Auth::user()->id == $question->user_id || Auth::user()->is_admin, 401);
+
         $question->answers()->where('best_answer', true)->update(['best_answer' => false]);
         $answer->update(['best_answer' => true]);
+
+        $this->pointService->add($answer->user, 'BEST_ANSWER');
 
         return redirect()->back();
     }

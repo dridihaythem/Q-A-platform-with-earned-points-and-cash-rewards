@@ -3,6 +3,7 @@
 namespace App\Actions\Fortify;
 
 use App\Models\User;
+use App\Services\PointService;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -12,6 +13,9 @@ class CreateNewUser implements CreatesNewUsers
 {
     use PasswordValidationRules;
 
+    public function __construct(private PointService $pointService)
+    {
+    }
     /**
      * Validate and create a newly registered user.
      *
@@ -32,10 +36,23 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
         ])->validate();
 
-        return User::create([
+        $user =  User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
+
+        $this->pointService->add($user, 'CREATE_ACCOUNT');
+
+        if (request()->has('id')) {
+
+            $user_who_invited_me = User::find(request()->id);
+
+            if ($user_who_invited_me) {
+                $this->pointService->add($user_who_invited_me, 'CREATE_ACCOUNT_WITH_MY_LINK');
+            }
+        }
+
+        return $user;
     }
 }

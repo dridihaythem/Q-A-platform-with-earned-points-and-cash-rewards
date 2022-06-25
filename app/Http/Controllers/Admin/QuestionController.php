@@ -6,10 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Question\UpdateQuestionRequest;
 use App\Models\Category;
 use App\Models\Question;
+use App\Services\PointService;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
+    public function __construct(private PointService $pointService)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -53,6 +58,8 @@ class QuestionController extends Controller
     public function publish(Question $question)
     {
         $question->update(['status' => 'published']);
+
+        $this->pointService->add($question->user, 'CREATE_QUESTION');
 
         return redirect()->back()
             ->with('success', 'تم النشر بنجاح');

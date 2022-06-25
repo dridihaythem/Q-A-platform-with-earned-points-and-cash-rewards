@@ -5,10 +5,16 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Answer\UpdateAnswerRequest;
 use App\Models\Answer;
+use App\Services\PointService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class AnswerController extends Controller
 {
+    public function __construct(private PointService $pointService)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -52,6 +58,12 @@ class AnswerController extends Controller
     public function publish(Answer $answer)
     {
         $answer->update(['status' => 'published']);
+
+        if (Str::length($answer->content) > 300) {
+            $this->pointService->add($answer->user, 'CREATE_ANSWER_MORE_300_WORDS');
+        } else if (Str::length($answer->content) > 150) {
+            $this->pointService->add($answer->user, 'CREATE_ANSWER');
+        }
 
         return redirect()->back()
             ->with('success', 'تم النشر بنجاح');
