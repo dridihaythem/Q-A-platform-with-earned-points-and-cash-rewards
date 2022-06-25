@@ -11,6 +11,12 @@
 .bg-primary-color{
     background-color: var(--primary-color);
 }
+.jf-flat{
+    font-family: 'JF-Flat';
+}
+.kufi{
+    font-family: 'Noto Kufi Arabic', sans-serif;
+}
 body{
     background-color: #F2F2F2!important;
     font-family: 'Noto Kufi Arabic', sans-serif;

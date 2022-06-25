@@ -59,8 +59,8 @@
                         {{ Auth::user()->name }}
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="{{ route('profile') }}"><i
+                                    class="fa-solid fa-circle-user"></i> الحساب</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
