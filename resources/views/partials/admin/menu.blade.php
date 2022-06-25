@@ -6,7 +6,7 @@
                     <img width="50" alt="image" class="rounded-circle"
                         src="https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png" />
                     <a href="#">
-                        <span class="block m-t-xs font-bold">UserName</span>
+                        <span class="block m-t-xs font-bold">{{ Auth::user()->name }}</span>
                     </a>
                 </div>
                 <div class="logo-element">
