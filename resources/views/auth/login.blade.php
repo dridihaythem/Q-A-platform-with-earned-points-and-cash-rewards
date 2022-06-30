@@ -8,6 +8,20 @@
             </div>
             <div class="card-body">
                 @include('partials.alert')
+
+                <a class="btn btn-primary d-block mb-2 w-75 mx-auto" href="{{ route('auth.redirect','facebook') }}">
+                    <i class="fa-brands fa-facebook-f"></i> الدخول عن طريق الفيسبوك
+                </a>
+
+                <a class="btn btn-primary d-block mb-2 w-75 mx-auto" style="background-color:#2AA9E0!important"
+                    href="{{ route('auth.redirect','twitter') }}">
+                    <i class="fa-brands fa-twitter"></i> الدخول عن طريق تويتر
+                </a>
+
+                <a class="btn btn-danger d-block mb-2 w-75 mx-auto" href="{{ route('auth.redirect','google') }}">
+                    <i class="fa-brands fa-google"></i> الدخول عن طريق جوجل
+                </a>
+
                 <form method="post">
                     @csrf
                     <div class="form-group mb-3">

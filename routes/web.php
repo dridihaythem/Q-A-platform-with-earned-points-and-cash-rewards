@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\QuestionController as AdminQuestionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WithdrawRequestController as AdminWithdrawRequestController;
+use App\Http\Controllers\Auth\ProviderAuthController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
@@ -23,6 +24,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::prefix('auth/provider')->as('auth.')->group(function () {
+    Route::get('/{provider}', [ProviderAuthController::class, 'redirect'])->name('redirect');
+    Route::get('/{provider}/callback', [ProviderAuthController::class, 'callback']);
+});
 
 Route::get('/', [QuestionController::class, 'index'])->name('questions.index');
 
