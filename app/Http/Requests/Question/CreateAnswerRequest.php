@@ -13,7 +13,7 @@ class CreateAnswerRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('create-answer');
     }
 
     /**

@@ -41,6 +41,7 @@
                 </div>
             </div>
             <div class="mt-3 lh-2">
+                @can('create-answer')
                 @include('partials.alert')
                 <form method="post" action="{{ route('questions.answer',$question) }}">
                     @csrf
@@ -51,6 +52,11 @@
                     <button class="btn btn-sm btn-primary"><i class="fa-solid fa-paper-plane"></i> إضافة
                         الإجابة</button>
                 </form>
+                @else
+                <div class="alert alert-danger">
+                    عفوا ، لا يمكنك إضافة أكثر من 5 إجابات كل يوم
+                </div>
+                @endcan
             </div>
         </div>
     </div>

@@ -8,6 +8,7 @@
             </div>
             <div class="card-body">
                 @include('partials.alert')
+                @can('create-question')
                 <form method="post" action="{{ route('questions.store') }}">
                     @csrf
                     <div class="form-group mb-3">
@@ -30,6 +31,11 @@
                         الإضافة
                     </button>
                 </form>
+                @else
+                <div class="alert alert-danger">
+                    عفوا ، لا يمكنك نشر أكثر من 5 أسئلة كل يوم
+                </div>
+                @endcan
             </div>
         </div>
     </div>
