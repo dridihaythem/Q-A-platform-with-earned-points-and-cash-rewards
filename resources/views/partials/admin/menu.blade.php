@@ -3,8 +3,7 @@
         <ul class="nav metismenu" id="side-menu">
             <li class="nav-header">
                 <div class="dropdown profile-element">
-                    <img width="50" alt="image" class="rounded-circle"
-                        src="https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png" />
+                    <img width="50" alt="image" class="rounded-circle" src="{{ Auth::user()->avatar }}" />
                     <a href="#">
                         <span class="block m-t-xs font-bold">{{ Auth::user()->name }}</span>
                     </a>

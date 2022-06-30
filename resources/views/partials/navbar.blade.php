@@ -80,6 +80,13 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
+                        @if(Auth::user()->is_admin)
+                        <li><a class="dropdown-item" href="{{ route('admin.index') }}"><i
+                                    class="fa-solid fa-circle-user"></i> لوحة التحكم</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        @endif
                         <li><a class="dropdown-item" href="{{ route('logout')}}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="nav-icon fa-solid fa-arrow-right-from-bracket"></i>

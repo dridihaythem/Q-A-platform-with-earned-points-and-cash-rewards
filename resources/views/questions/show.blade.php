@@ -2,9 +2,15 @@
 @section('content')
 <div class="row justify-content-center">
     <div class="col-md-10 bg-white shadow rounded-3 mb-2">
-        <div class="p-5 text-center">
-
-            <h1 class="fs-4">{{ $question->title}} ?</h1>
+        <div class="pt-2 text-end">
+            <span style="font-size: 12px" class="text-secondary">المشاركة :</span>
+            <a the target="_blank" href="https://www.facebook.com/sharer.php?u={{ route('questions.show',$question)}}"
+                class="btn btn-primary btn-sm rounded-2"><i class="fa-brands fa-facebook-square"></i></a>
+            <a the target="_blank" href="https://api.whatsapp.com/send?text={{ route('questions.show',$question)}}"
+                class="btn btn-success btn-sm rounded-2"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+        <div class="p-4 text-center">
+            <h1 class="fs-4">{{ $question->title}} ؟</h1>
             <p>{{ $question->content }}</p>
             <div class="mt-3">
                 <span
@@ -29,7 +35,7 @@
     <div class="col-md-10 bg-white shadow rounded-3 my-3">
         <div class="p-5">
             <div class="d-flex align-items-center gap-2">
-                <img width="60px" src="https://www.ejaabat.com/avatars/0.svg" alt="">
+                <img width="60px" class="rounded-circle" src="{{ Auth::user()->avatar }}" alt="">
                 <div>
                     {{ Auth::user()->name }}
                 </div>
@@ -66,7 +72,7 @@
     <div class="col-md-10 shadow rounded-3 my-3 @if($answer->best_answer) bg-primary-color @else bg-white @endif">
         <div class="p-5">
             <div class="d-flex align-items-center gap-2">
-                <img width="60px" src="https://www.ejaabat.com/avatars/0.svg" alt="">
+                <img width="60px" class="rounded-circle" src="{{ $answer->user->avatar }}" alt="">
                 <div>
                     {{ $answer->user->name }}
                     <small class="mt-1 d-block text-secondary">{{ $answer->created_at->diffForHumans() }}</small>
