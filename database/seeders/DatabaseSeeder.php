@@ -9,6 +9,7 @@ use App\Models\Question;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -20,11 +21,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(10)->create();
-        Category::factory(10)->create();
-        Question::factory(30)->published()->create();
-        Answer::factory(10)->create();
-        Answer::factory(80)->published()->create();
+        if (App::environment('local')) {
+            User::factory(10)->create();
+            Category::factory(10)->create();
+            Question::factory(30)->published()->create();
+            Answer::factory(10)->create();
+            Answer::factory(80)->published()->create();
+        } else {
+            Category::create([
+                'slug' => 'test',
+                'title' => 'التصنيف الرئيسي'
+            ]);
+        }
+
         PaymentMethod::create([
             'name' => 'paypal',
             'instruction' => 'قم بإدخال إيميل البيابل الخاص بك'
@@ -33,6 +42,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'bitcoin',
             'instruction' => 'قم بأدخل رابط محفظة البيتكون الخاصة بك'
         ]);
+
         User::factory(1)->create([
             'email' => 'demo@admin.com',
             'password' => Hash::make('demo@admin.com'),
