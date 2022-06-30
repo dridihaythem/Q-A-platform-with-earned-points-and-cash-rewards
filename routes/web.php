@@ -36,6 +36,11 @@ Route::resource('/request/withdraw', WithdrawRequestController::class)->only(['i
 
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 
+Route::prefix('pages')->as('pages.*')->group(function () {
+    Route::get('/privacy', [MainController::class, 'privacy'])->name('privacy');
+    Route::get('/terms', [MainController::class, 'terms'])->name('terms');
+});
+
 Route::prefix('admin')->as('admin.')->middleware('admin')->group(function () {
     Route::get('/', [AdminMainController::class, 'index'])->name('index');
     Route::resource('categories', CategoryController::class)->except('show');
