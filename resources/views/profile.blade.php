@@ -14,9 +14,7 @@
                     الحساب
                 </span>
                 <div class="mt-3">
-                    <img class="rounded-circle shadow" width="170" height="170"
-                        src="https://scontent.ftun14-1.fna.fbcdn.net/v/t1.6435-9/79515135_10111007623880301_5111576226921709568_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=EU6jyBsc6A0AX_x9YlA&_nc_ht=scontent.ftun14-1.fna&oh=00_AT9ud1Mq_tXXWdl2iWb0VjI5OfGtyHlv6KtDxaWi_ECDxA&oe=62DB3456"
-                        alt="">
+                    <img class="rounded-circle shadow" width="170" height="170" src="{{ Auth::user()->avatar }}" alt="">
                 </div>
 
                 <div class="my-3 kufi fs-5">{{ Auth::user()->name }}</div>
