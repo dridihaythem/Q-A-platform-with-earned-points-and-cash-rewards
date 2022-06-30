@@ -33,7 +33,7 @@ class QuestionController extends Controller
         $category =  Category::where('slug', $slug)->firstOrFail();
         $questions = Question::where('category_id', $category->id)
             ->published()->orderBy('id', 'desc')->paginate(10);
-        return view('questions.index', ['questions' => $questions]);
+        return view('questions.index', ['questions' => $questions, 'category' => $category]);
     }
 
     /**

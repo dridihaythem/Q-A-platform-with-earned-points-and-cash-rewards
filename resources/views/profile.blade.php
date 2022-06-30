@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title','تحكم المستخدم')
 @section('content')
 <style>
     .badge-title {

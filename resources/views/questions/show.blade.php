@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title',$question->title)
 @section('content')
 <div class="row justify-content-center">
     <div class="col-md-10 bg-white shadow rounded-3 mb-2">

@@ -1,4 +1,9 @@
 @extends('layouts.app')
+@if(Route::current()->getName() == 'category')
+@section('title',$category->title)
+@else
+@section('title','الصفحة الرئيسية')
+@endif
 @section('content')
 <div>
     @include('partials.alert')
