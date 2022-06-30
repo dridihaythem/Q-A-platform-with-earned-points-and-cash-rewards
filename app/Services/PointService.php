@@ -17,6 +17,7 @@ class PointService
             'CREATE_ACCOUNT_WITH_MY_LINK' => 10,
             'CREATE_QUESTION' => 5,
             'CREATE_ANSWER' => 5,
+            'CREATE_ANSWER_ON_MY_OWN_QUESTION' => 1,
             'CREATE_ANSWER_MORE_300_WORDS' => 20,
             'BEST_ANSWER' => 10,
         ];
