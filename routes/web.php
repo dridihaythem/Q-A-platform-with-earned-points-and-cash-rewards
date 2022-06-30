@@ -31,6 +31,7 @@ Route::prefix('auth/provider')->as('auth.')->group(function () {
 });
 
 Route::get('/', [QuestionController::class, 'index'])->name('questions.index');
+Route::get('/category/{slug}', [QuestionController::class, 'indexByCategory'])->name('category');
 
 Route::resource('questions', QuestionController::class)->only(['create', 'store', 'show']);
 Route::post('questions/{question}/answer', [QuestionController::class, 'answer'])->name('questions.answer');

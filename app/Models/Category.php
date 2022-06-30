@@ -10,4 +10,14 @@ class Category extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function questions()
+    {
+        return $this->hasMany(Question::class);
+    }
+
+    public function publishedQuestion()
+    {
+        return $this->hasMany(Question::class)->where('status', 'published');
+    }
 }

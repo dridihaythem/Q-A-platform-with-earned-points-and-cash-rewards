@@ -37,3 +37,6 @@ body{
     outline: none;
     box-shadow: none;
 }
+.nav-link{
+    color:#000;
+}

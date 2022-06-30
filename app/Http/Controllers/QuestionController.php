@@ -28,6 +28,14 @@ class QuestionController extends Controller
         return view('questions.index', ['questions' => $questions]);
     }
 
+    public function indexByCategory($slug)
+    {
+        $category =  Category::where('slug', $slug)->firstOrFail();
+        $questions = Question::where('category_id', $category->id)
+            ->published()->orderBy('id', 'desc')->paginate(10);
+        return view('questions.index', ['questions' => $questions]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

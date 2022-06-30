@@ -9,11 +9,26 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ route('questions.index') }}">
-                        <i class="fa-solid fa-house"></i>
-                        الصفحة الرئيسية
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-list"></i>
+                        التصنيفات
                     </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        @foreach (\App\Models\Category::all() as $category)
+                        <li>
+                            <a class="dropdown-item" href="{{ route('category',$category->slug) }}">
+                                {{ $category->title }}
+                            </a>
+                        </li>
+                        @if(!$loop->last)
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        @endif
+                        @endforeach
+                    </ul>
                 </li>
                 @auth
                 <li class="nav-item">
