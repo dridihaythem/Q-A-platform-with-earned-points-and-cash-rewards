@@ -40,3 +40,6 @@ body{
 .nav-link{
     color:#000;
 }
+.form-control {
+    text-align: right;
+}
