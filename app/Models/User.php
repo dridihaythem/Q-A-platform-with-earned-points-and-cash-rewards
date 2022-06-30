@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(WithdrawRequest::class);
     }
+
+    public function referrals()
+    {
+        return $this->hasMany(User::class);
+    }
 }

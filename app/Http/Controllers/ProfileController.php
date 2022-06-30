@@ -16,7 +16,7 @@ class ProfileController extends Controller
 
     public function index()
     {
-        $user = User::withCount(['publishedQuestions', 'publishedAnswers'])->firstOrFail(Auth::user()->id);
+        $user = User::withCount(['publishedQuestions', 'publishedAnswers', 'referrals'])->firstOrFail(Auth::user()->id);
         return view('profile', [
             'user' => $user,
             'balance' => $this->pointService->convert(Auth::user()->points)

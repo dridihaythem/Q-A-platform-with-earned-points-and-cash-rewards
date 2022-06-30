@@ -68,7 +68,7 @@
                         <div class="kufi mt-2">إجاباتي</div>
                     </div>
                     <div class="col-md-4">
-                        <div class="text-success fw-bold fs-4">--</div>
+                        <div class="text-success fw-bold fs-4">{{ $user->referrals_count }}</div>
                         <div class="kufi mt-2">عدد الإحالات</div>
                     </div>
                 </div>
