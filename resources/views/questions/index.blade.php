@@ -21,18 +21,16 @@
         let loading = document.getElementById('questions-loading');
         Livewire.on('noMorePosts',() => {
             hasMorePosts = false;
-            // alert('no more posts');
-        })
-        if(hasMorePosts){
-            Livewire.hook('message.sent', (el, component) => {
-                loading.classList.remove('d-none');
-            })
-            Livewire.hook('message.processed', (el, component) => {
-                loading.classList.add('d-none');
-            })
-        }else{
             loading.classList.add('d-none');
-        }
+        })
+        Livewire.hook('message.sent', (el, component) => {
+            if(hasMorePosts){
+                loading.classList.remove('d-none');
+            }
+        })
+        Livewire.hook('message.processed', (el, component) => {
+                loading.classList.add('d-none');
+        })
     });
 </script>
 
