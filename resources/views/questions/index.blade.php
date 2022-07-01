@@ -4,6 +4,30 @@
 @else
 @section('title','الصفحة الرئيسية')
 @endif
+@push('css')
+@livewireStyles
+@endpush
+@push('js')
+@livewireScripts
+
+<script type="text/javascript">
+    window.onscroll = function (ev) {
+        if ((window.innerHeight + window.scrollY + 90) >= document.body.offsetHeight) {
+            window.livewire.emit('load-more');
+        }
+    };
+    document.addEventListener("DOMContentLoaded", () => {
+        let loading = document.getElementById('questions-loading');
+        Livewire.hook('message.sent', (el, component) => {
+            loading.classList.remove('d-none');
+        })
+        Livewire.hook('message.processed', (el, component) => {
+            loading.classList.add('d-none');
+        })
+    });
+</script>
+
+@endpush
 @section('content')
 <div>
     @include('partials.alert')
@@ -35,7 +59,7 @@
         لم يتم العثور على أي نتائج
     </div>
     @endif
-    @foreach ($questions as $question)
+    {{-- @foreach ($questions as $question)
     <div class="card my-2">
         <a href="{{ route('questions.show',$question) }}" class="text-decoration-none text-dark">
             <div class="card-body">
@@ -43,9 +67,11 @@
             </div>
         </a>
     </div>
-    @endforeach
+    @endforeach --}}
 
-    {{ $questions->links() }}
+    <livewire:show-questions />
+
+    {{-- {{ $questions->links() }} --}}
 
 </div>
 @endsection
