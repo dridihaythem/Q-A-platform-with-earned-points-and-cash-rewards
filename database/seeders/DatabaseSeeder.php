@@ -21,6 +21,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call([
+            SettingSeeder::class
+        ]);
+
         if (App::environment('local')) {
             User::factory(10)->create();
             Category::factory(10)->create();
