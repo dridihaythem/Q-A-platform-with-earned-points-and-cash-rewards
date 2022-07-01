@@ -20,6 +20,8 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $dates = ['created_at'];
+
     public function getAvatarAttribute($value)
     {
         if ($value == null) {

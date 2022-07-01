@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DataTables\UsersDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User\UpdateUserRequest;
 use App\Models\User;
@@ -14,20 +15,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(UsersDataTable $dataTable)
     {
-        $users = User::withcount('publishedAnswers', 'publishedQuestions')
-            ->when($request->has('filter'), function ($query) use ($request) {
-                $filter = $request->filter;
-                if ($filter == 'banned') {
-                    $query->where('is_active', false);
-                } else if ($filter == 'admins') {
-                    $query->where('is_admin', true);
-                }
-            })
-            ->get();
-
-        return view('admin.users.index', ['users' => $users]);
+        return $dataTable->render('admin.users.index');
     }
 
     /**
