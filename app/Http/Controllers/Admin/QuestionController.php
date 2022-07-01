@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DataTables\QuestionsDataTable;
+use App\DataTables\UsersDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Question\UpdateQuestionRequest;
 use App\Models\Category;
@@ -20,12 +22,15 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, QuestionsDataTable $dataTable)
     {
-        $questions = Question::when($request->has('status'), function ($query) use ($request) {
-            $query->where('status', $request->status);
-        })->with('category')->get();
-        return view('admin.questions.index', ['questions' => $questions]);
+        // if ($request->ajax()) {
+        //     $questions = Question::when($request->has('status'), function ($query) use ($request) {
+        //         $query->where('status', $request->status);
+        //     })->with('category')->get();
+        // }
+        // return view('admin.questions.index');
+        return $dataTable->render('admin.questions.index');
     }
 
     /**
