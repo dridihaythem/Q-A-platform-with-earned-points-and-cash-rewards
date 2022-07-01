@@ -7,19 +7,29 @@
 @section('content')
 <div>
     @include('partials.alert')
+    @if(Route::current()->getName() !== 'category')
     <div class="dropdown me-auto text-end">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="questions-filter" data-bs-toggle="dropdown"
             aria-expanded="false">
             <i class="fa-solid fa-filter"></i> الفلترة
         </button>
         <ul class="dropdown-menu" aria-labelledby="questions-filter">
-            <li><a class="dropdown-item" href="?filter=solved"><i class="fa-solid fa-check-double"></i> مجابة</a></li>
+            <li><a class="dropdown-item" href="{{ route('questions.index') }}?filter=solved"><i
+                        class="fa-solid fa-check-double"></i> مجابة</a></li>
             <li>
                 <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="?filter=unanswered"><i class="fa-solid fa-xmark"></i> غير مجابة</a></li>
+            <li><a class="dropdown-item" href="{{ route('questions.index') }}?filter=unanswered"><i
+                        class="fa-solid fa-xmark"></i> غير مجابة</a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="{{ route('questions.index') }}"><i class="fa-solid fa-list"></i> الكل</a>
+            </li>
+
         </ul>
     </div>
+    @endif
     @if($questions->count() == 0)
     <div class="alert alert-danger my-2">
         لم يتم العثور على أي نتائج
