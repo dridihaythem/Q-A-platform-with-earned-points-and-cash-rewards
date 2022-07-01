@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DataTables\AnswersDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Answer\UpdateAnswerRequest;
 use App\Models\Answer;
@@ -20,13 +21,9 @@ class AnswerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(AnswersDataTable $dataTable)
     {
-        $answers = Answer::when($request->has('status'), function ($query) use ($request) {
-            $query->where('status', $request->status);
-        })->with('question')->get();
-
-        return view('admin.answers.index', ['answers' => $answers]);
+        return $dataTable->render('admin.answers.index');
     }
 
     /**
