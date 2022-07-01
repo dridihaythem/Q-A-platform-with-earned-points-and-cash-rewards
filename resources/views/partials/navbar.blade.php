@@ -45,8 +45,9 @@
                 </li>
                 @endauth
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control" type="search" placeholder="أكتب ما تبحث عنه ..." aria-label="Search">
+            <form class="d-flex" method="get" action="{{ route('questions.index') }}" role="search">
+                <input name="search" class="form-control" type="search" placeholder="أكتب ما تبحث عنه ..."
+                    aria-label="Search">
                 {{-- <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i>
                     البحث</button> --}}
             </form>

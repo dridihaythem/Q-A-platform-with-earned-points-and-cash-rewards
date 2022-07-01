@@ -24,7 +24,13 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $questions = Question::published()->orderBy('id', 'desc')->paginate(10);
+        $questions = Question::published()
+            ->when(request('search'), function ($query) {
+                $search = request('search');
+                return $query->where('title', 'like', '%' . $search . '%')
+                    ->Orwhere('content', 'like', '%' . $search . '%');
+            })
+            ->orderBy('id', 'desc')->paginate(10);
         return view('questions.index', ['questions' => $questions]);
     }
 
