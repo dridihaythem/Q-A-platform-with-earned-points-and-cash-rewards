@@ -24,12 +24,6 @@ class QuestionController extends Controller
      */
     public function index(Request $request, QuestionsDataTable $dataTable)
     {
-        // if ($request->ajax()) {
-        //     $questions = Question::when($request->has('status'), function ($query) use ($request) {
-        //         $query->where('status', $request->status);
-        //     })->with('category')->get();
-        // }
-        // return view('admin.questions.index');
         return $dataTable->render('admin.questions.index');
     }
 

@@ -13,8 +13,8 @@
 
     .dataTables_wrapper {
         padding-bottom: 0px;
-        overflow: hidden;
-        max-width: 100%;
+        /* overflow: hidden; */
+        /* max-width: 100%; */
     }
 </style>
 @endpush
