@@ -12,4 +12,11 @@ class SettingService
 
         return $setting ? $setting->value : null;
     }
+
+    public function save(string $slug, string $value)
+    {
+        if ($value != null) {
+            Setting::where('slug', $slug)->update(['value' => $value]);
+        }
+    }
 }

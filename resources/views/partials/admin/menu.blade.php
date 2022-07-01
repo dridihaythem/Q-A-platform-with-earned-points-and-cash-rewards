@@ -125,25 +125,47 @@
 
             <li>
                 <a href="#">
-                    <i class="fa-brands fa-paypal"></i>
+                    <i class="fa-solid fa-gear"></i>
                     <span class="fa arrow"></span>
-                    <span class="nav-label">التحكم في وسائل السحب</span>
+                    <span class="nav-label">الإعدادات</span>
                 </a>
                 <ul class="nav nav-second-level collapse">
                     <li>
-                        <a href="{{ route('admin.payment_methods.create') }}">
-                            <i class="fa-solid fa-circle-plus"></i>
-                            إضافة وسيلة سحب
+                        <a href="{{ route('admin.setting','questions-and-answers') }}">
+                            <i class="fa-solid fa-comments"></i>
+                            الأسئلة و الإجابات
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('admin.payment_methods.index') }}">
-                            <i class="fa-solid fa-list"></i>
-                            قائمة وسائل السحب
+                        <a href="{{ route('admin.setting','points-and-balance') }}">
+                            <i class="fa-solid fa-money-bill-trend-up"></i>
+                            النقاط و الرصيد
                         </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa-brands fa-paypal"></i>
+                            <span class="fa arrow"></span>
+                            <span class="nav-label">وسائل السحب</span>
+                        </a>
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <a href="{{ route('admin.payment_methods.create') }}">
+                                    <i class="fa-solid fa-circle-plus"></i>
+                                    إضافة وسيلة سحب
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.payment_methods.index') }}">
+                                    <i class="fa-solid fa-list"></i>
+                                    قائمة وسائل السحب
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </li>
+
         </ul>
 
     </div>

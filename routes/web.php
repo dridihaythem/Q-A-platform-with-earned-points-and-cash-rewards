@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\MainController as AdminMainController;
 use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\QuestionController as AdminQuestionController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WithdrawRequestController as AdminWithdrawRequestController;
 use App\Http\Controllers\Auth\ProviderAuthController;
@@ -24,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::prefix('auth/provider')->as('auth.')->group(function () {
     Route::get('/{provider}', [ProviderAuthController::class, 'redirect'])->name('redirect');
     Route::get('/{provider}/callback', [ProviderAuthController::class, 'callback']);
@@ -61,4 +63,9 @@ Route::prefix('admin')->as('admin.')->middleware('admin')->group(function () {
     Route::resource('payment_methods', PaymentMethodController::class)->except('show');
 
     Route::resource('/withdraw', AdminWithdrawRequestController::class)->except(['show', 'create', 'store']);
+
+    Route::prefix('settings')->group(function () {
+        Route::get('/{slug}', [SettingController::class, 'show'])->name('setting');
+        Route::post('/{slug}', [SettingController::class, 'save']);
+    });
 });
