@@ -42,9 +42,6 @@ class FortifyServiceProvider extends ServiceProvider
         });
 
         Fortify::registerView(function (Request $request) {
-            if ($request->has('id')) {
-                Cookie::queue('id', $request->id, 60);
-            }
             return view('auth.register');
         });
 
