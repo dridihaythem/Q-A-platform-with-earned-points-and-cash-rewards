@@ -104,9 +104,21 @@
 
     {{-- أسئلة مشابهة --}}
 
+    @if($similar_questions->count() > 0)
     <div class="col-md-10 bg-primary-color shadow rounded-2 my-3 py-3 text-white text-center">
         أسئلة مشابهة
     </div>
+
+    @foreach ($similar_questions as $similar_question)
+    <div class="col-md-10 shadow rounded-2 my-3 py-3 ">
+        <span class="bg-primary-color rounded-circle d-inline-block me-2 p-2 text-center">?</span>
+        <a class="text-dark text-decoration-none" href="{{ route('questions.show',$similar_question)}}">
+            {{ $similar_question->title }} ؟
+            <p class="text-secondary mt-2 ms-3"> {{ Str()->limit( $similar_question->bestAnswer->content,155) }} </p>
+        </a>
+    </div>
+    @endforeach
+    @endif
 
 
 </div>

@@ -35,4 +35,11 @@ class Question extends Model
     {
         return $this->hasMany(Answer::class)->where('status', 'published');
     }
+
+    public function bestAnswer()
+    {
+        return $this->hasOne(Answer::class)
+            ->where('status', 'published')
+            ->where('best_answer', true);
+    }
 }

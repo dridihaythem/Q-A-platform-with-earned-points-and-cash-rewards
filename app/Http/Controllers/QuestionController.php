@@ -8,12 +8,13 @@ use App\Models\Answer;
 use App\Models\Category;
 use App\Models\Question;
 use App\Services\PointService;
+use App\Services\QuestionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
 {
-    public function __construct(private PointService $pointService)
+    public function __construct(private PointService $pointService, private QuestionService $questionService)
     {
         $this->middleware('auth')->only(['create', 'store', 'answer', 'chooseBestAnswer']);
     }
@@ -79,7 +80,8 @@ class QuestionController extends Controller
             ->published()
             ->with('publishedAnswers.user')
             ->firstOrFail();
-        return view('questions.show', ['question' => $question]);
+
+        return view('questions.show', ['question' => $question, 'similar_questions' => $this->questionService->getSimilarQuestions($question)]);
     }
 
     public function answer(Question $question, CreateAnswerRequest $request)
