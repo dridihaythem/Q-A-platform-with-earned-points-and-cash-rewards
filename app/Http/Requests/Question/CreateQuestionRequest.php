@@ -2,10 +2,15 @@
 
 namespace App\Http\Requests\Question;
 
+use App\Rules\minWords;
+use App\Services\SettingService;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateQuestionRequest extends FormRequest
 {
+    public function __construct(private SettingService $settingService)
+    {
+    }
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -25,8 +30,16 @@ class CreateQuestionRequest extends FormRequest
     {
         return [
             'category_id' => 'required|numeric|exists:categories,id',
-            'title' => 'required',
-            'content' => 'required'
+            'title' => ['required', new minWords($this->settingService->get('MIN_QUESTION_TITLE_WORDS'))],
+            'content' => ['required', new minWords($this->settingService->get('MIN_QUESTION_CONTENT_WORDS'))],
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'title' => 'عنوان',
+            'content' => 'وصف'
         ];
     }
 }

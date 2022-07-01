@@ -8,7 +8,7 @@ use Exception;
 class PointService
 {
     private $rules = [];
-    private $rate = 0.1;
+    private $rate;
 
     public function __construct()
     {
@@ -21,6 +21,8 @@ class PointService
             'CREATE_ANSWER_MORE_300_WORDS' => 20,
             'BEST_ANSWER' => 10,
         ];
+
+        $this->rate = (new SettingService())->get('POINT_EQUAL_DOLLAR');
     }
 
     public function add(User $user, $rule)

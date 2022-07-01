@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Withdraw;
 
 use App\Rules\haveBalance;
+use App\Rules\minAmountToWithdraw;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateWithdrawRequest extends FormRequest
@@ -26,7 +27,7 @@ class CreateWithdrawRequest extends FormRequest
     {
         return [
             'payment_method_id' => 'required|numeric|exists:payment_methods,id',
-            'amount' => ['required', 'numeric', 'min:1', new haveBalance()],
+            'amount' => ['required', 'numeric', 'min:1', new haveBalance(), new minAmountToWithdraw()],
             'payment_details' => 'required'
         ];
     }
