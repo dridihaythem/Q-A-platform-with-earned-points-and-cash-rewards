@@ -11,6 +11,7 @@
 @livewireScripts
 
 <script type="text/javascript">
+    let hasMorePosts = true;
     window.onscroll = function (ev) {
         if ((window.innerHeight + window.scrollY + 90) >= document.body.offsetHeight) {
             window.livewire.emit('load-more');
@@ -18,12 +19,20 @@
     };
     document.addEventListener("DOMContentLoaded", () => {
         let loading = document.getElementById('questions-loading');
-        Livewire.hook('message.sent', (el, component) => {
-            loading.classList.remove('d-none');
+        Livewire.on('noMorePosts',() => {
+            hasMorePosts = false;
+            // alert('no more posts');
         })
-        Livewire.hook('message.processed', (el, component) => {
+        if(hasMorePosts){
+            Livewire.hook('message.sent', (el, component) => {
+                loading.classList.remove('d-none');
+            })
+            Livewire.hook('message.processed', (el, component) => {
+                loading.classList.add('d-none');
+            })
+        }else{
             loading.classList.add('d-none');
-        })
+        }
     });
 </script>
 

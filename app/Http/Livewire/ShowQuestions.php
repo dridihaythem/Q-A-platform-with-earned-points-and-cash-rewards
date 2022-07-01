@@ -35,8 +35,15 @@ class ShowQuestions extends Component
                     return $query->whereHas('publishedAnswers');
                 }
             })
-            ->orderBy('id', 'desc')
-            ->paginate($this->limitPerPage);
+            ->orderBy('id', 'desc');
+
+        $count = $questions->count();
+
+        $questions = $questions->paginate($this->limitPerPage);
+
+        if ($questions->count() == $count) {
+            $this->emit('noMorePosts');
+        }
 
         return view('livewire.show-questions', ['questions' => $questions]);
     }
