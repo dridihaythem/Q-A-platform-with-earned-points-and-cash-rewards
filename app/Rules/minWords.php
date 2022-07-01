@@ -28,7 +28,7 @@ class minWords implements Rule
      */
     public function passes($attribute, $value)
     {
-        $this->attribute = $attribute;
+        $this->attribute = $attribute == 'title' ? 'العنوان' : 'المحتوى';
         $trimmed = trim($value);
         $numWords = count(explode(' ', $trimmed));
         return $numWords >= $this->min;
@@ -41,6 +41,6 @@ class minWords implements Rule
      */
     public function message()
     {
-        return 'عفوا ال' . $this->attribute . ' يجب أن يحتوي على الأقل على ' . $this->min . ' كلمة';
+        return 'عفوا ' . $this->attribute . ' يجب أن يحتوي على الأقل على ' . $this->min . ' كلمة';
     }
 }

@@ -38,8 +38,8 @@ class CreateQuestionRequest extends FormRequest
     public function attributes()
     {
         return [
-            'title' => 'عنوان',
-            'content' => 'وصف'
+            'title' => 'العنوان',
+            'content' => 'الوصف'
         ];
     }
 }
