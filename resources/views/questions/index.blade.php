@@ -7,15 +7,17 @@
 @section('content')
 <div>
     @include('partials.alert')
-    <div class="dropdown me-auto">
+    <div class="dropdown me-auto text-end">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="questions-filter" data-bs-toggle="dropdown"
             aria-expanded="false">
-            الفلترة
+            <i class="fa-solid fa-filter"></i> الفلترة
         </button>
         <ul class="dropdown-menu" aria-labelledby="questions-filter">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" href="?filter=solved"><i class="fa-solid fa-check-double"></i> مجابة</a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="?filter=unanswered"><i class="fa-solid fa-xmark"></i> غير مجابة</a></li>
         </ul>
     </div>
     @if($questions->count() == 0)
