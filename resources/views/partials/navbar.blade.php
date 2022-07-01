@@ -47,7 +47,7 @@
             </ul>
             <form class="d-flex" method="get" action="{{ route('questions.index') }}" role="search">
                 <input name="search" class="form-control" type="search" placeholder="أكتب ما تبحث عنه ..."
-                    aria-label="Search">
+                    aria-label="Search" value="{{ request('search') }}">
                 {{-- <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i>
                     البحث</button> --}}
             </form>
