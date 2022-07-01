@@ -1,5 +1,11 @@
 @extends('layouts.app')
 @section('title','إضافة سؤال')
+@push('css')
+@livewireStyles
+@endpush
+@push('js')
+@livewireScripts
+@endpush
 @section('content')
 <div class="row justify-content-center">
     <div class="col-md-8">
@@ -20,10 +26,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group mb-3">
-                        <label class="mb-1">السؤال :</label>
-                        <input name="title" type="text" class="form-control" placeholder="ما هو سعر صرف الدولار اليوم">
-                    </div>
+                    <livewire:create-question-input :title="old('title')" />
                     <div class="form-group mb-3">
                         <label class="mb-1">وصف السؤال :</label>
                         <textarea name="content" class="form-control">{{ old('content') }}</textarea>
