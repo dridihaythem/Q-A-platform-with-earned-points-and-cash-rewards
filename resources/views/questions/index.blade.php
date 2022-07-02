@@ -66,19 +66,8 @@
         لم يتم العثور على أي نتائج
     </div>
     @endif
-    {{-- @foreach ($questions as $question)
-    <div class="card my-2">
-        <a href="{{ route('questions.show',$question) }}" class="text-decoration-none text-dark">
-            <div class="card-body">
-                {{ $question->title }} ؟
-            </div>
-        </a>
-    </div>
-    @endforeach --}}
 
     <livewire:show-questions />
-
-    {{-- {{ $questions->links() }} --}}
 
 </div>
 @endsection

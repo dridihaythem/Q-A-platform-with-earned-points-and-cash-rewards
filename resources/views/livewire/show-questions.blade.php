@@ -7,6 +7,10 @@
             </div>
         </a>
     </div>
+
+    @if(!$loop->first && $loop->index % 5 == 0 )
+    @include('partials.ads-between-questions')
+    @endif
     @endforeach
 
 
