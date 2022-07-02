@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bbdd71f887877b27985f6f48f7ec106c",
+    "content-hash": "7568626765c87b0c37bd695ac6d38b87",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -119,6 +119,39 @@
                 }
             ],
             "time": "2021-08-15T20:50:18+00:00"
+        },
+        {
+            "name": "chehivskiy/i18n-arabic",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chehivskiy/I18N_Arabic.git",
+                "reference": "7539fb160b2c67538c8a0cd3ca21440d3ea781a0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chehivskiy/I18N_Arabic/zipball/7539fb160b2c67538c8a0cd3ca21440d3ea781a0",
+                "reference": "7539fb160b2c67538c8a0cd3ca21440d3ea781a0",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "I18N/Arabic.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Michael Chehivskiy",
+                    "email": "michael.chehivskiy@gmail.com"
+                }
+            ],
+            "description": "Class enhances developing Arabic web applications by providing set of methods to process and present Arabic text",
+            "support": {
+                "source": "https://github.com/chehivskiy/I18N_Arabic/tree/1.0.2"
+            },
+            "time": "2019-10-08T15:03:10+00:00"
         },
         {
             "name": "dasprid/enum",

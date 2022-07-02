@@ -9,11 +9,12 @@ use App\Http\Requests\Admin\Question\UpdateQuestionRequest;
 use App\Models\Category;
 use App\Models\Question;
 use App\Services\PointService;
+use App\Services\QuestionService;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
-    public function __construct(private PointService $pointService)
+    public function __construct(private PointService $pointService, private QuestionService $questionService)
     {
     }
 
@@ -59,6 +60,8 @@ class QuestionController extends Controller
         $question->update(['status' => 'published']);
 
         $this->pointService->add($question->user, 'CREATE_QUESTION');
+
+        $this->questionService->createImage($question);
 
         return redirect()->back()
             ->with('success', 'تم النشر بنجاح');

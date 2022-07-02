@@ -52,6 +52,14 @@ return [
             'throw' => false,
         ],
 
+        'questions' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/images/questions'),
+            'url' => env('APP_URL') . '/images/questions',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

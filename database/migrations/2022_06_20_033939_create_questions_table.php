@@ -23,6 +23,7 @@ return new class extends Migration
             $table->longText('content');
             $table->integer('views')->default(0);
             $table->enum('status', ['published', 'pending', 'deleted'])->default('pending');
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }
