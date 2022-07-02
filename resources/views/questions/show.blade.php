@@ -3,6 +3,36 @@
 @push('meta')
 <meta property="og:image" content="{{ $question->photo}}">
 @endpush
+@push('js')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    function checkAnswerLength(e){
+        e.preventDefault();
+        let form = document.getElementById('create-answer-form');
+        let answer = document.getElementById('create-answer').value;
+        if(answer.length > 0 && answer.length < 300){
+            Swal.fire({
+                title: 'إجابتك تحتوي على أقل من 300 حرف',
+                text: "أظف المزيد من التفصيل لتجويد الاجابة والحصول على نقاط اضافية 😀",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'نشر الإجابة',
+                cancelButtonText: 'تعديل الإجابة'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            })
+        }else{
+            // error
+            form.submit();
+        }
+    }
+</script>
+@endpush
 @section('content')
 <div class="row justify-content-center">
     <div class="col-md-10 bg-white shadow rounded-3 mb-2">
@@ -47,11 +77,12 @@
             <div class="mt-3 lh-2">
                 @can('create-answer')
                 @include('partials.alert')
-                <form method="post" action="{{ route('questions.answer',$question) }}">
+                <form method="post" id="create-answer-form" onsubmit="checkAnswerLength(event)"
+                    action="{{ route('questions.answer',$question) }}">
                     @csrf
                     <div class="mb-3">
                         <label>الإجابة :</label>
-                        <textarea name="content" class="form-control">{{ old('content') }}</textarea>
+                        <textarea name="content" id="create-answer" class="form-control">{{ old('content') }}</textarea>
                     </div>
                     <button class="btn btn-sm btn-primary"><i class="fa-solid fa-paper-plane"></i> إضافة
                         الإجابة</button>
