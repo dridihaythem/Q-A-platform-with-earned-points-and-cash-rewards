@@ -59,7 +59,7 @@ class AnswerController extends Controller
         if ($answer->user_id == $answer->question->user_id) {
             $this->pointService->add($answer->user, 'CREATE_ANSWER_ON_MY_OWN_QUESTION');
         } else if (Str::length($answer->content) > 300) {
-            $this->pointService->add($answer->user, 'CREATE_ANSWER_MORE_300_WORDS');
+            $this->pointService->add($answer->user, 'CREATE_ANSWER_MORE_300_CHARS');
         } else if (Str::length($answer->content) > 150) {
             $this->pointService->add($answer->user, 'CREATE_ANSWER');
         }

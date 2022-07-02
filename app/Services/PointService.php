@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Setting;
 use App\Models\User;
 use Exception;
 
@@ -12,15 +13,7 @@ class PointService
 
     public function __construct()
     {
-        $this->rules  = [
-            'CREATE_ACCOUNT' => 5,
-            'CREATE_ACCOUNT_WITH_MY_LINK' => 10,
-            'CREATE_QUESTION' => 5,
-            'CREATE_ANSWER' => 5,
-            'CREATE_ANSWER_ON_MY_OWN_QUESTION' => 1,
-            'CREATE_ANSWER_MORE_300_WORDS' => 20,
-            'BEST_ANSWER' => 10,
-        ];
+        $this->rules  = Setting::where('type', 'points')->pluck('value', 'slug')->toArray();
 
         $this->rate = (new SettingService())->get('POINT_EQUAL_DOLLAR');
     }

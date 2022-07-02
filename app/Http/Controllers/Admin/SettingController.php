@@ -23,12 +23,19 @@ class SettingController extends Controller
             case 'points-and-balance':
                 $title = "إعدادات النقاط و الرصيد";
                 $slugs = ['MIN_AMOUNT_TO_WITHDRAW', 'POINT_EQUAL_DOLLAR'];
-
+                break;
+            case 'activities':
+                $title = "إعدادات نقاط النشاطات";
+                $slugs = [];
                 break;
             default:
                 abort(404);
         }
-        $settings = Setting::whereIn('slug', $slugs)->get();
+        if ($slug == 'activities') {
+            $settings = Setting::where('type', 'points')->get();
+        } else {
+            $settings = Setting::whereIn('slug', $slugs)->get();
+        }
         return view('admin.settings', ['title' => $title, 'settings' => $settings]);
     }
 

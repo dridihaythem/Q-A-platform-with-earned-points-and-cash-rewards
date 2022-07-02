@@ -143,6 +143,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ route('admin.setting','activities') }}">
+                            <i class="fa-solid fa-money-bill-trend-up"></i>
+                            نقاط النشاطات
+                        </a>
+                    </li>
+                    <li>
                         <a href="#">
                             <i class="fa-brands fa-paypal"></i>
                             <span class="fa arrow"></span>

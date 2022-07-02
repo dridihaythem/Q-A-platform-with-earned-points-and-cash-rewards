@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug');
             $table->string('value')->nullable();
+            $table->enum('type', ['settings', 'points'])->default('settings');
             $table->timestamps();
         });
     }
