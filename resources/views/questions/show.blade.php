@@ -38,9 +38,11 @@
     <div class="col-md-10 bg-white shadow rounded-3 mb-2">
         <div class="pt-2 text-end">
             <span style="font-size: 12px" class="text-secondary">المشاركة :</span>
-            <a the target="_blank" href="https://www.facebook.com/sharer.php?u={{ route('questions.show',$question)}}"
+            <a the target="_blank"
+                href="https://www.facebook.com/sharer.php?u={{ route('questions.show',$question)}}@if(Auth::check())?id={{Auth::user()->id}}@endif"
                 class="btn btn-primary btn-sm rounded-2"><i class="fa-brands fa-facebook-square"></i></a>
-            <a the target="_blank" href="https://api.whatsapp.com/send?text={{ route('questions.show',$question)}}"
+            <a the target="_blank"
+                href="https://api.whatsapp.com/send?text={{ route('questions.show',$question)}}@if(Auth::check())?id={{Auth::user()->id}}@endif"
                 class="btn btn-success btn-sm rounded-2"><i class="fa-brands fa-whatsapp"></i></a>
         </div>
         <div class="p-4 text-center">
