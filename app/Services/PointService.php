@@ -25,6 +25,11 @@ class PointService
         }
 
         $user->increment('points', $this->rules[$rule]);
+
+        $user->notifications()->create([
+            'setting_id' => Setting::where('slug', $rule)->first()->id,
+            'points' => $this->rules[$rule],
+        ]);
     }
 
     public function convert($points)

@@ -30,7 +30,7 @@ class CreateQuestionRequest extends FormRequest
     {
         return [
             'category_id' => 'required|numeric|exists:categories,id',
-            'title' => ['required', new minWords($this->settingService->get('MIN_QUESTION_TITLE_WORDS'))],
+            'title' => ['required', 'max:255', new minWords($this->settingService->get('MIN_QUESTION_TITLE_WORDS'))],
             'content' => ['required', new minWords($this->settingService->get('MIN_QUESTION_CONTENT_WORDS'))],
         ];
     }

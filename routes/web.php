@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WithdrawRequestController as AdminWithdrawRequestController;
 use App\Http\Controllers\Auth\ProviderAuthController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\WithdrawRequestController;
@@ -43,6 +44,7 @@ Route::get('/banned', [MainController::class, 'banned'])->name('banned');
 Route::resource('/request/withdraw', WithdrawRequestController::class)->only(['index', 'create', 'store']);
 
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
 
 Route::prefix('pages')->as('pages.')->group(function () {
     Route::get('/privacy', [MainController::class, 'privacy'])->name('privacy');

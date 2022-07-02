@@ -66,6 +66,19 @@
                     </a>
                 </li>
                 @else
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('notifications') }}">
+                        <span class="position-relative">
+                            <i class="fa-regular fa-bell fa-2x"></i>
+                            @if(Auth::user()->notifications->where('seen',false)->count() > 0)
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                {{ Auth::user()->notifications->where('seen',false)->count() }}
+                            </span>
+                            @endif
+                        </span>
+                    </a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
