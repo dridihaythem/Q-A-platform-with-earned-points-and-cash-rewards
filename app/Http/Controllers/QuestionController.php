@@ -89,6 +89,8 @@ class QuestionController extends Controller
             ->with('publishedAnswers.user')
             ->firstOrFail();
 
+        $this->questionService->incrementViews($question);
+
         return view('questions.show', ['question' => $question, 'similar_questions' => $this->questionService->getSimilarQuestions($question)]);
     }
 

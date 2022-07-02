@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Question;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 // use Johntaa\Arabic\I18N_Arabic;
@@ -59,5 +60,15 @@ class QuestionService
         $img->save(Storage::disk('questions')->path($filename));
 
         $question->update(['photo' => $filename]);
+    }
+
+    public function incrementViews(Question $question)
+    {
+        $cache_prefix = 'question_views_' . $question->id . '_ip_' . request()->ip();
+
+        if (!Cache::has($cache_prefix)) {
+            $question->increment('views');
+            Cache::put($cache_prefix, 'true', now()->addHours(72));
+        }
     }
 }
