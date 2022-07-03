@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Question\CreateAnswerRequest;
-use App\Http\Requests\Question\CreateQuestionRequest;
 use App\Models\Answer;
 use App\Models\Category;
 use App\Models\Question;
+use Illuminate\Http\Request;
 use App\Services\PointService;
 use App\Services\QuestionService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Question\CreateAnswerRequest;
+use App\Http\Requests\Question\CreateQuestionRequest;
 
 class QuestionController extends Controller
 {
@@ -45,7 +45,7 @@ class QuestionController extends Controller
 
     public function indexByCategory($slug)
     {
-        $category =  Category::where('slug', $slug)->firstOrFail();
+        $category = Category::where('slug', $slug)->firstOrFail();
         $questions = Question::where('category_id', $category->id)
             ->published()->orderBy('id', 'desc')->paginate(10);
         return view('questions.index', ['questions' => $questions, 'category' => $category]);
@@ -70,10 +70,21 @@ class QuestionController extends Controller
      */
     public function store(CreateQuestionRequest $request)
     {
-        Auth::user()->questions()->create($request->all());
+        $question = Auth::user()->questions()->create($request->all());
+
+        $message = 'تم إضافة سؤالك بنجاح';
+        if (Auth::user()->is_trusted) {
+            $this->pointService->add($question->user, 'CREATE_QUESTION');
+
+            $this->questionService->createImage($question);
+
+            $question->update(['status' => 'published']);
+        } else {
+            $message .= 'سيتم نشره بعد مراجعته من قبل فريقنا';
+        }
 
         return redirect()->route('questions.index')
-            ->with('success', 'تم إضافة سؤالك بنجاح ، سيتم نشره بعد مراجته من قبل فريقنا');
+            ->with('success', $message);
     }
 
     /**
@@ -96,12 +107,21 @@ class QuestionController extends Controller
 
     public function answer(Question $question, CreateAnswerRequest $request)
     {
-        Auth::user()->answers()->create([
+        $answer = Auth::user()->answers()->create([
             'question_id' => $question->id,
-            'content' => $request->content
+            'content' => $request->content,
+            'status' => Auth::user()->is_trusted ? 'published' : 'pending',
         ]);
 
-        return redirect()->back()->with('success', 'تم إضافة إجابتك ، سيتم نشرها بعد مراجعتها من قبل فريقنا');
+        $message = 'تم إضافة إجابتك';
+
+        if (Auth::user()->is_trusted) {
+            $this->pointService->handleAnswerPoints($answer);
+        } else {
+            $message .= '. سيتم نشرها بعد مراجعتها من قبل فريقنا';
+        }
+
+        return redirect()->back()->with('success', $message);
     }
 
     public function chooseBestAnswer(Question $question, Answer $answer)

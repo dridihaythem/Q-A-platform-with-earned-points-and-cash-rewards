@@ -50,7 +50,8 @@ class DatabaseSeeder extends Seeder
         User::factory(1)->create([
             'email' => 'demo@admin.com',
             'password' => Hash::make('demo@admin.com'),
-            'is_admin' => true
+            'type' => 'admin',
+            'is_trusted' => true
         ]);
     }
 }

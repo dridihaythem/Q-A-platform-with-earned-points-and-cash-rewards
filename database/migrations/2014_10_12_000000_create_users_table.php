@@ -25,7 +25,8 @@ return new class extends Migration
             $table->string('avatar')->nullable();
             $table->integer('points')->default(0);
             $table->boolean('is_active')->default(true);
-            $table->boolean('is_admin')->default(false);
+            $table->enum('type', ['user', 'moderator', 'admin'])->default('user');
+            $table->boolean('is_trusted')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

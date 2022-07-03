@@ -2,9 +2,11 @@
 
 namespace App\Services;
 
-use App\Models\Setting;
-use App\Models\User;
 use Exception;
+use App\Models\User;
+use App\Models\Answer;
+use App\Models\Setting;
+use Illuminate\Support\Str;
 
 class PointService
 {
@@ -13,9 +15,20 @@ class PointService
 
     public function __construct()
     {
-        $this->rules  = Setting::where('type', 'points')->pluck('value', 'slug')->toArray();
+        $this->rules = Setting::where('type', 'points')->pluck('value', 'slug')->toArray();
 
         $this->rate = (new SettingService())->get('POINT_EQUAL_DOLLAR');
+    }
+
+    public function handleAnswerPoints(Answer $answer)
+    {
+        if ($answer->user_id == $answer->question->user_id) {
+            $this->add($answer->user, 'CREATE_ANSWER_ON_MY_OWN_QUESTION');
+        } else if (Str::length($answer->content) > 300) {
+            $this->add($answer->user, 'CREATE_ANSWER_MORE_300_CHARS');
+        } else if (Str::length($answer->content) > 150) {
+            $this->add($answer->user, 'CREATE_ANSWER');
+        }
     }
 
     public function add(User $user, $rule)

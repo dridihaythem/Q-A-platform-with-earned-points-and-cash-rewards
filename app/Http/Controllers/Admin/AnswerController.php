@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Answer;
+use Illuminate\Http\Request;
+use App\Services\PointService;
 use App\DataTables\AnswersDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Answer\UpdateAnswerRequest;
-use App\Models\Answer;
-use App\Services\PointService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class AnswerController extends Controller
 {
+
     public function __construct(private PointService $pointService)
     {
     }
@@ -56,13 +56,7 @@ class AnswerController extends Controller
     {
         $answer->update(['status' => 'published']);
 
-        if ($answer->user_id == $answer->question->user_id) {
-            $this->pointService->add($answer->user, 'CREATE_ANSWER_ON_MY_OWN_QUESTION');
-        } else if (Str::length($answer->content) > 300) {
-            $this->pointService->add($answer->user, 'CREATE_ANSWER_MORE_300_CHARS');
-        } else if (Str::length($answer->content) > 150) {
-            $this->pointService->add($answer->user, 'CREATE_ANSWER');
-        }
+        $this->pointService->handleAnswerPoints($answer);
 
         return redirect()->back()
             ->with('success', 'تم النشر بنجاح');
