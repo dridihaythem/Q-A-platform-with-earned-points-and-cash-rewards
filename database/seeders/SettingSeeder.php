@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Setting;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class SettingSeeder extends Seeder
 {
@@ -42,7 +42,7 @@ class SettingSeeder extends Seeder
         Setting::create([
             'title' => 'أقل عدد كلمات مسموحة لمحتوى السؤال',
             'slug' => 'MIN_QUESTION_CONTENT_WORDS',
-            'value' => '10'
+            'value' => '4'
         ]);
 
         Setting::create([

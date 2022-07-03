@@ -61,9 +61,11 @@
         </ul>
     </div>
     @else
+    @if ($category->description)
     <div class="alert alert-info">
         <i class="fa-solid fa-bell"></i> {{$category->description}}
     </div>
+    @endif
     <center>
         {{-- <img src=" {{ $category->photo }}" width="150px" height="150px"> --}}
     </center>
