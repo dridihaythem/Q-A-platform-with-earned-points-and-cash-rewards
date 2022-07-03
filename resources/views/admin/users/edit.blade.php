@@ -28,9 +28,9 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-lg-2 col-form-label">الرصيد :</label>
+                <label class="col-lg-2 col-form-label">النقاط :</label>
                 <div class="col-lg-10">
-                    <input type="text" value="{{ $user->balance }}" name="balance" class="form-control">
+                    <input type="text" value="{{ $user->points }}" name="points" class="form-control">
                 </div>
             </div>
 
@@ -45,11 +45,22 @@
             </div>
 
             <div class="form-group row">
+                <label class="col-lg-2 col-form-label">عضو موثوق :</label>
+                <div class="col-lg-10">
+                    <select name="is_trusted" class="form-control">
+                        <option @selected($user->is_trusted) value="1">نعم</option>
+                        <option @selected(!$user->is_trusted) value="0">لا</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
                 <label class="col-lg-2 col-form-label">النوع :</label>
                 <div class="col-lg-10">
-                    <select name="is_admin" class="form-control">
-                        <option @selected(!$user->is_admin) value="0">مستخدم</option>
-                        <option @selected($user->is_admin) value="1">أدمين</option>
+                    <select name="type" class="form-control">
+                        <option @selected($user->type == 'user') value="user">مستخدم</option>
+                        <option @selected($user->type == 'admin') value="admin">أدمين</option>
+                        <option @selected($user->type == 'moderator') value="moderator">مشرف</option>
                     </select>
                 </div>
             </div>

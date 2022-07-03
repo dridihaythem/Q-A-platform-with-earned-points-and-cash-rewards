@@ -3,14 +3,11 @@
 namespace App\DataTables;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
+use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
 class UsersDataTable extends DataTable
 {
@@ -34,6 +31,22 @@ class UsersDataTable extends DataTable
             ->editColumn('created_at', function (User $user) {
                 return $user->created_at;
             })
+            ->editColumn('type', function (User $user) {
+                if ($user->type == 'user') {
+                    return 'مستخدم';
+                } else if ($user->type == 'admin') {
+                    return 'أدمين';
+                } else {
+                    return 'مشرف';
+                }
+            })
+            ->editColumn('is_trusted', function (User $user) {
+                if ($user->is_trusted) {
+                    return ' <span class="badge badge-primary"><i class="fa-solid fa-circle-check"></i> نعم</span>';
+                } else {
+                    return '<span class="badge badge-danger"><i class="fa-solid fa-circle-xmark"></i> لا</span>';
+                }
+            })
             ->addColumn('actions', function (User $user) {
                 $data = "<form method='post' action='" . route('admin.users.destroy', $user) . "'>
                 <input type='hidden' name='_token' value='" . csrf_token() . "'>
@@ -48,7 +61,7 @@ class UsersDataTable extends DataTable
             </form>";
                 return $data;
             })
-            ->rawColumns(['status', 'actions']);
+            ->rawColumns(['status', 'actions', 'is_trusted']);
     }
 
     /**
@@ -65,7 +78,7 @@ class UsersDataTable extends DataTable
                 if ($filter == 'banned') {
                     $query->where('is_active', false);
                 } else if ($filter == 'admins') {
-                    $query->where('is_admin', true);
+                    $query->wherein('type', ['admin', 'moderator']);
                 }
             })->newQuery();
     }
@@ -101,6 +114,8 @@ class UsersDataTable extends DataTable
             Column::make('created_at')->title('تاريخ التسجيل'),
             Column::make('published_questions_count')->title('عدد الأسئلة المنشورة'),
             Column::make('published_answers_count')->title('عدد الإجابات المنشورة'),
+            Column::make('is_trusted')->title('عضو موثوق'),
+            Column::make('type')->title('الصلاحيات'),
             Column::make('actions')->title('?'),
         ];
     }

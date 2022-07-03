@@ -25,9 +25,10 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'balance' => 'required|numeric|min:0',
+            'points' => 'required|numeric|min:0',
             'is_active' => 'required|boolean',
-            'is_admin' => 'required|boolean'
+            'is_trusted' => 'required|boolean',
+            'type' => 'required|in:user,moderator,admin',
         ];
     }
 }
