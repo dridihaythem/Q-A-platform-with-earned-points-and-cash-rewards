@@ -2,16 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Models\Question;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Button;
+use App\Models\Question;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
+use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
 class QuestionsDataTable extends DataTable
 {
@@ -53,7 +51,7 @@ class QuestionsDataTable extends DataTable
                     الحذف
                 </button>
                 </form>";
-                $data .= "<form class='d-inline' method='post' 
+                $data .= "<form class='d-inline' method='post'
                 action='" . route('admin.questions.destroy', $question) . "'>
                <input type='hidden' name='_token' value='" . csrf_token() . "'>
                 <input type='hidden' name='_method' value='delete'>
@@ -71,7 +69,11 @@ class QuestionsDataTable extends DataTable
     public function query(Question $model): QueryBuilder
     {
         return $model->when(request('status'), function ($query) {
-            $query->where('status', request('status'));
+            if (Auth::user()->type == 'admin') {
+                $query->where('status', request('status'));
+            } else {
+                $query->where('status', 'pending');
+            }
         })->with('category')->withCount('publishedAnswers')->newQuery();
     }
 
@@ -94,7 +96,7 @@ class QuestionsDataTable extends DataTable
             Column::make('views')->title('المشاهدات'),
             Column::make('published_answers_count')->title('الإجابات'),
             Column::make('status')->title('الحالة'),
-            Column::make('actions')->title('?')
+            Column::make('actions')->title('?'),
         ];
     }
 }

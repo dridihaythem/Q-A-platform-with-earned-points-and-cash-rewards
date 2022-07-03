@@ -94,7 +94,7 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        @if(Auth::user()->is_admin)
+                        @if(Auth::user()->type == 'admin' || Auth::user()->type == 'moderator' )
                         <li><a class="dropdown-item" href="{{ route('admin.index') }}"><i
                                     class="fa-solid fa-circle-user"></i> لوحة التحكم</a></li>
                         <li>

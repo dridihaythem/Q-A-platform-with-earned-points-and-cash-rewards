@@ -52,7 +52,9 @@
                 <span
                     class="px-4 py-2 d-inline-block rounded-4 @if(count($question->publishedAnswers) == 0) bg-danger text-white @else bg-primary-color @endif">
                     @if(count($question->publishedAnswers) == 0)
-                    <i class="fa-solid fa-circle-xmark"></i> لم تتم الإجابة بعد
+                    <i class="fa-solid fa-circle-xmark"></i> بدون إجابة
+                    @elseif($question->bestAnswer !== null)
+                    <i class="fa-solid fa-check-double"></i> تم تحديد أفضل إجابة
                     @else
                     <i class="fa-solid fa-check"></i> تمت الإجابة
                     @endif

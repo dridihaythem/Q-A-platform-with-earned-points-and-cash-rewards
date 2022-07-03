@@ -20,6 +20,24 @@
                     </span>
                 </a>
             </li>
+            @if (Auth::user()->type == 'moderator')
+            <li>
+                <a href="{{ route('admin.questions.index') }}?status=pending">
+                    <i class="fa-solid fa-list"></i>
+                    <span class="nav-label">
+                        قائمة الأسئلة في إنتظار النشر
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.answers.index') }}?status=pending">
+                    <i class="fa-solid fa-list"></i>
+                    <span class="nav-label">
+                        قائمة الإجابات في إنتظار النشر
+                    </span>
+                </a>
+            </li>
+            @elseif (Auth::user()->type == 'admin')
             <li>
                 <a href="#">
                     <i class="fa fa-th-large"></i>
@@ -171,6 +189,7 @@
                     </li>
                 </ul>
             </li>
+            @endif
 
         </ul>
 

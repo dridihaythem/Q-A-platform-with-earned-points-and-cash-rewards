@@ -1,20 +1,20 @@
 <?php
 
-use App\Http\Controllers\Admin\AnswerController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\MainController as AdminMainController;
-use App\Http\Controllers\Admin\PaymentMethodController;
-use App\Http\Controllers\Admin\QuestionController as AdminQuestionController;
-use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\WithdrawRequestController as AdminWithdrawRequestController;
-use App\Http\Controllers\Auth\ProviderAuthController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
-use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\AnswerController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\WithdrawRequestController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\ProviderAuthController;
+use App\Http\Controllers\Admin\PaymentMethodController;
+use App\Http\Controllers\Admin\MainController as AdminMainController;
+use App\Http\Controllers\Admin\QuestionController as AdminQuestionController;
+use App\Http\Controllers\Admin\WithdrawRequestController as AdminWithdrawRequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::prefix('auth/provider')->as('auth.')->group(function () {
     Route::get('/{provider}', [ProviderAuthController::class, 'redirect'])->name('redirect');

@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Question;
 use Livewire\Component;
+use App\Models\Question;
 
 class ShowQuestions extends Component
 {
@@ -12,7 +12,6 @@ class ShowQuestions extends Component
     protected $listeners = [
         'load-more' => 'loadMore',
     ];
-
 
     public function loadMore()
     {
@@ -35,6 +34,7 @@ class ShowQuestions extends Component
                     return $query->whereHas('publishedAnswers');
                 }
             })
+            ->withCount(['bestAnswer', 'answers'])
             ->orderBy('id', 'desc');
 
         $count = $questions->count();
