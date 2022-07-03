@@ -65,6 +65,17 @@
     <div class="alert alert-danger my-2">
         لم يتم العثور على أي نتائج
     </div>
+    @else
+    @switch(request()->get('filter'))
+    @case('solved')
+    <h4 class="text-center mt-1 mb-3">قائمة الأسئلة المجابة :</h4>
+    @break
+    @case('unanswered')
+    <h4 class="text-center mt-1 mb-3">قائمة الأسئلة الغير مجابة :</h4>
+    @break
+    @default
+
+    @endswitch
     @endif
 
     <livewire:show-questions />
