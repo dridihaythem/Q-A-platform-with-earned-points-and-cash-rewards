@@ -2,15 +2,15 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use App\Models\Answer;
 use App\Models\Category;
-use App\Models\PaymentMethod;
 use App\Models\Question;
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\PaymentMethod;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
@@ -51,6 +51,13 @@ class DatabaseSeeder extends Seeder
             'email' => 'demo@admin.com',
             'password' => Hash::make('demo@admin.com'),
             'type' => 'admin',
+            'is_trusted' => true
+        ]);
+
+        User::factory(1)->create([
+            'email' => 'demo@moderator.com',
+            'password' => Hash::make('demo@moderator.com'),
+            'type' => 'moderator',
             'is_trusted' => true
         ]);
     }
