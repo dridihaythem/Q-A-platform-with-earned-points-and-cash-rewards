@@ -16,17 +16,31 @@
                         التصنيفات
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        @foreach (\App\Models\Category::all() as $category)
+                        @foreach (\App\Models\Category::doesntHave('category')->with('subCategories')->get() as
+                        $category)
                         <li>
                             <a class="dropdown-item" href="{{ route('category',$category->slug) }}">
                                 {{ $category->title }}
                             </a>
                         </li>
-                        @if(!$loop->last)
+                        @if($category->subCategories->count() != 0 || !$loop->last)
                         <li>
                             <hr class="dropdown-divider">
                         </li>
                         @endif
+                        @foreach ($category->subCategories as $subCategory)
+                        <li class="ms-2">
+                            <a class="dropdown-item" href="{{ route('category',$subCategory->slug) }}">
+                                <i class="fa-solid fa-angle-left"></i>
+                                {{ $subCategory->title }}
+                            </a>
+                        </li>
+                        @if (!$loop->last || !$loop->parent->last)
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        @endif
+                        @endforeach
                         @endforeach
                     </ul>
                 </li>

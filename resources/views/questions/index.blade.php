@@ -60,6 +60,13 @@
 
         </ul>
     </div>
+    @else
+    <div class="alert alert-info">
+        <i class="fa-solid fa-bell"></i> {{$category->description}}
+    </div>
+    <center>
+        {{-- <img src=" {{ $category->photo }}" width="150px" height="150px"> --}}
+    </center>
     @endif
 
     <livewire:show-questions />

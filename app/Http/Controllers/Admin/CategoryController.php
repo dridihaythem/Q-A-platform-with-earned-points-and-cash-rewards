@@ -29,7 +29,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
+        $categories = Category::doesntHave('category')->get();
         return view('admin.categories.create', ['categories' => $categories]);
     }
 
@@ -63,7 +63,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        $categories = Category::all();
+        $categories = Category::doesntHave('category')->get();
         return view('admin.categories.edit', ['category' => $category, 'categories' => $categories]);
     }
 
