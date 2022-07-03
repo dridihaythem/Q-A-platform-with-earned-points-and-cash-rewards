@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Category\CreateCategoryRequest;
-use App\Http\Requests\Admin\Category\UpdateCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\Admin\Category\CreateCategoryRequest;
+use App\Http\Requests\Admin\Category\UpdateCategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -17,7 +18,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::withCount('publishedQuestion')->with('category')->get();
         return view('admin.categories.index', ['categories' => $categories]);
     }
 
@@ -28,7 +29,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create');
+        $categories = Category::all();
+        return view('admin.categories.create', ['categories' => $categories]);
     }
 
     /**
@@ -39,7 +41,14 @@ class CategoryController extends Controller
      */
     public function store(CreateCategoryRequest $request)
     {
-        Category::create($request->validated());
+        $data = $request->validated();
+        unset($data['file']);
+
+        if ($request->hasFile(('file'))) {
+            $data['photo'] = Storage::disk('categories')->put('', $request->file('file'));
+        }
+
+        Category::create($data);
 
         return redirect()->route('admin.categories.index')
             ->with('success', 'تم إضافة التنصيف بنجاح');
@@ -54,7 +63,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('admin.categories.edit', ['category' => $category]);
+        $categories = Category::all();
+        return view('admin.categories.edit', ['category' => $category, 'categories' => $categories]);
     }
 
     /**
@@ -66,7 +76,14 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        $category->update($request->validated());
+        $data = $request->validated();
+        unset($data['file']);
+
+        if ($request->hasFile(('file'))) {
+            $data['photo'] = Storage::disk('categories')->put('', $request->file('file'));
+        }
+
+        $category->update($data);
 
         return redirect()->route('admin.categories.index')
             ->with('success', 'تم تعديل التنصيف بنجاح');

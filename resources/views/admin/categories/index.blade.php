@@ -15,6 +15,7 @@
                     <tr>
                         <th>#ID</th>
                         <th>العنوان</th>
+                        <th>التصنيف الرئيسي</th>
                         <th>عدد الأسئلة</th>
                         <th>?</th>
                     </tr>
@@ -24,7 +25,8 @@
                     <tr class="gradeX">
                         <td>{{ $category->id }}</td>
                         <td>{{ $category->title }}</td>
-                        <td>--</td>
+                        <td>{{ $category->category?->title }}</td>
+                        <td>{{ $category->published_question_count }}</td>
                         <td>
                             <form method="post" action="{{ route('admin.categories.destroy',$category) }}">
                                 @csrf

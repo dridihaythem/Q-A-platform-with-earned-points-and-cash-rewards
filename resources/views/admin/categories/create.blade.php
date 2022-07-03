@@ -10,8 +10,21 @@
     <div class="card-body">
         @include('partials.alert')
 
-        <form action="{{ route('admin.categories.store') }}" method="post">
+        <form action="{{ route('admin.categories.store') }}" method="post" enctype="multipart/form-data">
             @csrf
+
+            <div class="form-group row">
+                <label class="col-lg-2 col-form-label">التصنيف الرئيسي :</label>
+                <div class="col-lg-10">
+                    <select name="category_id" class="form-control">
+                        <option value="">-- لا يوجد --</option>
+                        @foreach ($categories as $category)
+                        <option @selected(old('category_id')==$category->id) value="{{$category->id}}">{{
+                            $category->title}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
 
             <div class="form-group row">
                 <label class="col-lg-2 col-form-label">ال Slug :</label>
@@ -26,6 +39,20 @@
                 <div class="col-lg-10">
                     <input type="text" value="{{ old('title') }}" name="title" placeholder="أسئلة عامة"
                         class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-lg-2 col-form-label">الوصف :</label>
+                <div class="col-lg-10">
+                    <input type="text" value="{{ old('description') }}" name="description" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-lg-2 col-form-label">صورة :</label>
+                <div class="col-lg-10">
+                    <input type="file" name="file" class="form-control">
                 </div>
             </div>
 

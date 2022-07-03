@@ -24,8 +24,11 @@ class UpdateCategoryRequest extends FormRequest
     public function rules()
     {
         return [
+            'category_id' => 'nullable|integer|exists:categories,id',
             'slug' => 'required|unique:categories,slug,' . $this->category->id . ',id',
-            'title' => 'required'
+            'title' => 'required',
+            'description' => 'nullable',
+            'file' => 'nullable|image'
         ];
     }
 }
