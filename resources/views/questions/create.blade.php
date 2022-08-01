@@ -1,9 +1,14 @@
 @extends('layouts.app')
 @section('title','إضافة سؤال')
 @push('css')
+<link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
 @livewireStyles
 @endpush
 @push('js')
+<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+<script>
+    new EasyMDE({ element: document.getElementById("markdown-editor") ,direction:'rtl'});
+</script>
 @livewireScripts
 @endpush
 @section('content')
@@ -29,7 +34,7 @@
                     <livewire:create-question-input :title="old('title')" />
                     <div class="form-group mb-3">
                         <label class="mb-1">وصف السؤال :</label>
-                        <textarea name="content" class="form-control">{{ old('content') }}</textarea>
+                        <textarea name="content" id="markdown-editor">{{ old('content') }}</textarea>
                     </div>
                     <button class="btn btn-primary">
                         الإضافة

@@ -20,3 +20,9 @@ select.form-control:not([size]):not([multiple]) {
 .table-responsive::-webkit-scrollbar {
     display: none;
 }
+.CodeMirror .cm-spell-error:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word) {
+    background: transparent !important;
+}
+.editor-statusbar{
+    display: none;
+}

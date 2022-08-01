@@ -3,14 +3,21 @@
 @push('meta')
 <meta property="og:image" content="{{ $question->photo}}">
 @endpush
+@push('css')
+<link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+@endpush
 @push('js')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+@auth
+<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
 <script>
+    const easyMDE =  new EasyMDE({ element: document.getElementById("create-answer") ,direction:'rtl',minHeight:'100px'});
+
     function checkAnswerLength(e){
         e.preventDefault();
         let form = document.getElementById('create-answer-form');
-        let answer = document.getElementById('create-answer').value;
+        let answer = easyMDE.value();
+        console.log(answer)
         if(answer.length > 0 && answer.length < 300){
             Swal.fire({
                 title: 'إجابتك تحتوي على أقل من 300 حرف',
@@ -32,6 +39,7 @@
         }
     }
 </script>
+@endauth
 @endpush
 @section('content')
 <div class="row justify-content-center">
@@ -47,7 +55,7 @@
         </div>
         <div class="p-4 text-center">
             <h1 class="fs-4">{{ $question->title}} ؟</h1>
-            <p>{{ $question->content }}</p>
+            <p>{!! Illuminate\Support\Str::markdown($question->content) !!}</p>
             <div class="mt-3">
                 <span
                     class="px-4 py-2 d-inline-block rounded-4 @if(count($question->publishedAnswers) == 0) bg-danger text-white @else bg-primary-color @endif">
@@ -124,7 +132,7 @@
                 </div>
             </div>
             <div class="mt-3 lh-2">
-                {{ $answer->content }}
+                {!! Illuminate\Support\Str::markdown($answer->content) !!}
                 @if(!$answer->best_answer && (Auth::check() && (Auth::user()->id == $question->user_id ||
                 Auth::user()->is_admin)))
                 <form class="my-1" method="post"

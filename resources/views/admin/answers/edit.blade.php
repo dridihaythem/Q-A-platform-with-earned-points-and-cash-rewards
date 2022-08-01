@@ -1,6 +1,17 @@
 @extends('layouts.admin')
 @include('partials.admin.datatable')
 
+@push('css')
+<link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+@endpush
+@push('js')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+<script>
+    const easyMDE =  new EasyMDE({ element: document.getElementById("answer-input") ,direction:'rtl',minHeight:'100px'});
+</script>
+@endpush
+
 @section('content')
 <div class="card mt-2">
     <div class="card-header bg-dark text-white">
@@ -32,7 +43,7 @@
             <div class="form-group row">
                 <label class="col-lg-2 col-form-label">الإجابة :</label>
                 <div class="col-lg-10">
-                    <textarea name="content" class="form-control">{{ $answer->content }}</textarea>
+                    <textarea name="content" id="answer-input" class="form-control">{{ $answer->content }}</textarea>
                 </div>
             </div>
 
