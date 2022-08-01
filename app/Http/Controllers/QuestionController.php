@@ -55,7 +55,7 @@ class QuestionController extends Controller
      */
     public function store(CreateQuestionRequest $request)
     {
-        $question = Auth::user()->questions()->create($request->all());
+        $question = Auth::user()->questions()->create($request->validated());
 
         $message = 'تم إضافة سؤالك بنجاح';
         if (Auth::user()->is_trusted) {
