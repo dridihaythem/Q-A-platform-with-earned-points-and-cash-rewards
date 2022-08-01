@@ -3,16 +3,12 @@
 @push('meta')
 <meta property="og:image" content="{{ $question->photo}}">
 @endpush
-@push('css')
-<link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
-@endpush
+@include('partials.markdown-editor',['minHeight'=>'100px'])
+
 @push('js')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @auth
-<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
 <script>
-    const easyMDE =  new EasyMDE({ element: document.getElementById("create-answer") ,direction:'rtl',minHeight:'100px'});
-
     function checkAnswerLength(e){
         e.preventDefault();
         let form = document.getElementById('create-answer-form');
@@ -41,6 +37,7 @@
 </script>
 @endauth
 @endpush
+
 @section('content')
 <div class="row justify-content-center">
     <div class="col-md-10 bg-white shadow rounded-3 mb-2">
@@ -94,7 +91,7 @@
                     @csrf
                     <div class="mb-3">
                         <label>الإجابة :</label>
-                        <textarea name="content" id="create-answer" class="form-control">{{ old('content') }}</textarea>
+                        <textarea name="content" class="markdown-editor">{{ old('content') }}</textarea>
                     </div>
                     <button class="btn btn-sm btn-primary"><i class="fa-solid fa-paper-plane"></i> إضافة
                         الإجابة</button>

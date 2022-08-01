@@ -1,16 +1,8 @@
 @extends('layouts.admin')
 @include('partials.admin.datatable')
 
-@push('css')
-<link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
-@endpush
-@push('js')
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
-<script>
-    const easyMDE =  new EasyMDE({ element: document.getElementById("question-input") ,direction:'rtl'});
-</script>
-@endpush
+@include('partials.markdown-editor')
+
 
 @section('content')
 <div class="card mt-2">
@@ -46,8 +38,7 @@
             <div class="form-group row">
                 <label class="col-lg-2 col-form-label">المحتوى :</label>
                 <div class="col-lg-10">
-                    <textarea name="content" id="question-input"
-                        class="form-control">{{ $question->content }}</textarea>
+                    <textarea name="content" class="form-control markdown-editor">{{ $question->content }}</textarea>
                 </div>
             </div>
 
