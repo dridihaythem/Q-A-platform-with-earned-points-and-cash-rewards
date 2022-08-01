@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Question\UpdateQuestionRequest;
 use App\Models\Category;
 use App\Models\Question;
+use App\Models\User;
 use App\Services\PointService;
 use App\Services\QuestionService;
 use Illuminate\Http\Request;
@@ -60,6 +61,11 @@ class QuestionController extends Controller
         $question->update(['status' => 'published']);
 
         $this->pointService->add($question->user, 'CREATE_QUESTION');
+
+        if ($question->user->user_id != null && $question->user->publishedQuestions()->count() == 5) {
+            //بعد نشر 5 أسئلة ، إضافة نقاط للعضو الذي قام بدعوته
+            $this->pointService->add(User::where('id', $question->user->user_id)->first(), 'CREATE_ACCOUNT_WITH_MY_LINK');
+        }
 
         $this->questionService->createImage($question);
 

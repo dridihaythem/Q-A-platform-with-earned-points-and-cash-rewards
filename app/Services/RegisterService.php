@@ -17,8 +17,6 @@ class RegisterService
             $ref = User::where('id', Cookie::get('id'))->first();
             if ($ref) {
                 $user->update(['user_id' => $ref->id]);
-
-                $this->pointService->add($ref, 'CREATE_ACCOUNT_WITH_MY_LINK');
             }
         }
     }
