@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\MainController as AdminMainController;
 use App\Http\Controllers\Admin\QuestionController as AdminQuestionController;
 use App\Http\Controllers\Admin\WithdrawRequestController as AdminWithdrawRequestController;
+use App\Http\Controllers\UploadImage;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,8 @@ Route::prefix('pages')->as('pages.')->group(function () {
     Route::get('/privacy', [MainController::class, 'privacy'])->name('privacy');
     Route::get('/terms', [MainController::class, 'terms'])->name('terms');
 });
+
+Route::post('/api/upload-image', [UploadImage::class, 'markdownUploadImage'])->name('markdown.upload-image');
 
 Route::prefix('admin')->as('admin.')->middleware('admin')->group(function () {
     Route::get('/', [AdminMainController::class, 'index'])->name('index');
