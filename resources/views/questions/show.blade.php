@@ -39,7 +39,7 @@
 @endpush
 
 @section('content')
-<div class="row justify-content-center">
+<div class="row justify-content-center" id="show-question-page">
     <div class="col-md-10 bg-white shadow rounded-3 mb-2">
         <div class="pt-2 text-end">
             <span style="font-size: 12px" class="text-secondary">المشاركة :</span>
@@ -52,7 +52,7 @@
         </div>
         <div class="p-4 text-center">
             <h1 class="fs-4">{{ $question->title}} ؟</h1>
-            <p>{!! Illuminate\Support\Str::markdown($question->content) !!}</p>
+            <span class="markdown-content">{!! Illuminate\Support\Str::markdown($question->content) !!}</span>
             <div class="mt-3">
                 <span
                     class="px-4 py-2 d-inline-block rounded-4 @if(count($question->publishedAnswers) == 0) bg-danger text-white @else bg-primary-color @endif">
@@ -129,7 +129,7 @@
                 </div>
             </div>
             <div class="mt-3 lh-2">
-                {!! Illuminate\Support\Str::markdown($answer->content) !!}
+                <span class="markdown-content">{!! Illuminate\Support\Str::markdown($answer->content) !!}</span>
                 @if(!$answer->best_answer && (Auth::check() && (Auth::user()->id == $question->user_id ||
                 Auth::user()->is_admin)))
                 <form class="my-1" method="post"

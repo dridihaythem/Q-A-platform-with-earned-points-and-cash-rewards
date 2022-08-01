@@ -49,3 +49,8 @@ body{
 .editor-statusbar{
     display: none;
 }
+#show-question-page .markdown-content img{
+    width: 300px;
+    height: 250px;
+    border-radius: 10px;
+}
